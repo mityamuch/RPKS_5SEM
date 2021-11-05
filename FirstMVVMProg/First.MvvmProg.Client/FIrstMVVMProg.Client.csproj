@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Muhanov.Wpf.MVVM\Muhanov.Wpf.MVVM.csproj" />
     <ProjectReference Include="..\Wpf.MVVM.Core\Muhanov.Wpf.MVVM.Core.csproj" />
   </ItemGroup>
 

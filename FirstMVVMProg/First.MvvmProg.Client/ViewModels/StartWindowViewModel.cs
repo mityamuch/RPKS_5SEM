@@ -37,7 +37,7 @@ namespace FIrstMVVMProg.Client.ViewModels
 
         private void Example()
         {
-            MessageBox.Show("Example command work from viewmodel");
+            MessageBox.Show("Привет чувак");
         }
 
         private void SwitchCanExecute()
