@@ -1,13 +1,14 @@
-﻿using Muhanov.Wpf.MVVM.Core;
+using Muhanov.Wpf.MVVM.Core;
 using System;
 using System.Globalization;
 using System.Windows;
-
+using System.Windows.Media;
 
 namespace Muhanov.Wpf.MVVM
 {
     internal sealed class ArithmeticConverter : MultiValueConverterBase<ArithmeticConverter>
     {
+
         public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(parameter is string operation))
@@ -29,9 +30,6 @@ namespace Muhanov.Wpf.MVVM
             var leftOperand = (dynamic)values[0];
             var rightOperand = (dynamic)values[1];
 
-            // leftOperand.NotExistingMethod();
-            // leftOperand += new StreamGeometry();
-
             switch (operation)
             {
                 case "+": return leftOperand + rightOperand;
@@ -41,6 +39,7 @@ namespace Muhanov.Wpf.MVVM
                 case "%": return leftOperand % rightOperand;
                 default: throw new ArgumentException("Invalid operation", nameof(operation));
             }
-        } 
+        }
+
     }
 }
