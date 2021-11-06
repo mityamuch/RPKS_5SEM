@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace Muhanov.Wpf.MVVM
 {
-    internal sealed class EqualConverter : MultiValueConverterBase<EqualConverter>
+    public sealed class EqualConverter : MultiValueConverterBase<EqualConverter>
     {
         public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

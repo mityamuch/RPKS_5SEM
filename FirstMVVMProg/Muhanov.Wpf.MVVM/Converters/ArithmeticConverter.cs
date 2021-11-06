@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace Muhanov.Wpf.MVVM
 {
-    internal sealed class ArithmeticConverter : MultiValueConverterBase<ArithmeticConverter>
+    public sealed class ArithmeticConverter : MultiValueConverterBase<ArithmeticConverter>
     {
 
         public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

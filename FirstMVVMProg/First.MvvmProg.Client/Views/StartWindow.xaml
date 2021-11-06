@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FIrstMVVMProg.Client"
         mc:Ignorable="d"
-        xmlns:converters="clr-namespace:Muhanov.Wpf.MVVM"
+        xmlns:converters="clr-namespace:Muhanov.Wpf.MVVM;assembly=Muhanov.Wpf.MVVM"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:viewModels="clr-namespace:FIrstMVVMProg.Client.ViewModels"
         Title="StartWindow" Height="450" Width="800" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" >
@@ -32,7 +32,35 @@
         </Button>
 
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Я - TextBlock! (2)">
-           
+            <TextBlock.FontSize>
+                <MultiBinding Converter="{converters:ArithmeticConverter}">
+                    <MultiBinding.FallbackValue>
+                        <system:Double>
+                            100.0
+                        </system:Double>
+                    </MultiBinding.FallbackValue>
+                    <MultiBinding.TargetNullValue>
+                        <system:Double>
+                            10.0
+                        </system:Double>
+                    </MultiBinding.TargetNullValue>
+                    <MultiBinding.ConverterParameter>
+                        <system:String>
+                            -
+                        </system:String>
+                    </MultiBinding.ConverterParameter>
+                    <MultiBinding.Bindings>
+                        <Binding Path="NotExistingProperty" />
+                        <Binding>
+                            <Binding.Source>
+                                <system:Double>
+                                    30.0
+                                </system:Double>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding.Bindings>
+                </MultiBinding>
+            </TextBlock.FontSize>
         </TextBlock>
 
     </Grid>
