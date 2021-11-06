@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace DXpress2022.Client
+namespace FIrstMVVMProg.Client
 {
 
     public partial class StartWindow : Window
