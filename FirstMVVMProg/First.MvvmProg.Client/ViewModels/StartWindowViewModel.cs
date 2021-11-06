@@ -9,7 +9,6 @@ namespace FIrstMVVMProg.Client.ViewModels
     {
 
         private ICommand _exampleCommand;
-        private ICommand _switchCanExecuteCommand;
         private bool _canExecute;
 
         public StartWindowViewModel()
@@ -28,21 +27,11 @@ namespace FIrstMVVMProg.Client.ViewModels
                 OnPropertyChanged(nameof(CanExecute));
             }
         }
-
         public ICommand ExampleCommand =>
             _exampleCommand ??= new RelayCommand(_ => Example(), _ => CanExecute);
-
-        public ICommand SwitchCanExecuteCommand =>
-            _switchCanExecuteCommand ??= new RelayCommand(_ => SwitchCanExecute());
-
         private void Example()
         {
             MessageBox.Show("Привет чувак");
-        }
-
-        private void SwitchCanExecute()
-        {
-            CanExecute = !CanExecute;
         }
 
     }

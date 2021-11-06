@@ -1,4 +1,4 @@
-using Muhanov.Wpf.MVVM.Core;
+﻿using Muhanov.Wpf.MVVM.Core;
 using System;
 using System.Globalization;
 using System.Windows;
@@ -6,9 +6,8 @@ using System.Windows.Media;
 
 namespace Muhanov.Wpf.MVVM
 {
-    internal sealed class ArithmeticConverter : MultiValueConverterBase<ArithmeticConverter>
+    internal sealed class EqualConverter : MultiValueConverterBase<EqualConverter>
     {
-
         public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(parameter is string operation))
@@ -31,14 +30,10 @@ namespace Muhanov.Wpf.MVVM
 
             switch (operation)
             {
-                case "+": return leftOperand + rightOperand;
-                case "-": return leftOperand - rightOperand;
-                case "*": return leftOperand * rightOperand;
-                case "/": return leftOperand / rightOperand;
-                case "%": return leftOperand % rightOperand;
+                case "==": return leftOperand + rightOperand;
+                case "!=": return leftOperand - rightOperand;
                 default: throw new ArgumentException("Invalid operation", nameof(operation));
             }
         }
-
     }
 }
