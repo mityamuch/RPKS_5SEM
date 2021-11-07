@@ -8,60 +8,193 @@
         xmlns:converters="clr-namespace:Muhanov.Wpf.MVVM;assembly=Muhanov.Wpf.MVVM"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:viewModels="clr-namespace:FIrstMVVMProg.Client.ViewModels"
-        Title="StartWindow" Height="450" Width="800" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" >
+        Title="StartWindow" Height="700" Width="800" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" >
     <Window.DataContext>
         <viewModels:StartWindowViewModel />
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
         <Button 
             Grid.Column="1" 
             Grid.Row="0" 
-            Name="btNext" 
+            Grid.ColumnSpan="2"
             Content="КНОПКА" 
             Command="{Binding ExampleCommand}">
         </Button>
-
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Я - TextBlock! (2)">
-            <TextBlock.FontSize>
-                <MultiBinding Converter="{converters:ArithmeticConverter}">
-                    <MultiBinding.FallbackValue>
-                        <system:Double>
-                            100.0
-                        </system:Double>
-                    </MultiBinding.FallbackValue>
-                    <MultiBinding.TargetNullValue>
-                        <system:Double>
-                            10.0
-                        </system:Double>
-                    </MultiBinding.TargetNullValue>
+        <TextBlock Grid.Row="1" Text="EqualConverter:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"  >
+            <TextBlock.Text>
+                <MultiBinding Converter="{converters:EqualConverter}">
                     <MultiBinding.ConverterParameter>
                         <system:String>
-                            -
+                            ==
                         </system:String>
                     </MultiBinding.ConverterParameter>
                     <MultiBinding.Bindings>
-                        <Binding Path="NotExistingProperty" />
                         <Binding>
                             <Binding.Source>
-                                <system:Double>
-                                    30.0
-                                </system:Double>
+                                <system:Int32>
+                                    30
+                                </system:Int32>
+                            </Binding.Source>
+                        </Binding>
+                        <Binding>
+                            <Binding.Source>
+                                <system:Int32>
+                                    30
+                                </system:Int32>
                             </Binding.Source>
                         </Binding>
                     </MultiBinding.Bindings>
                 </MultiBinding>
-            </TextBlock.FontSize>
+            </TextBlock.Text>
         </TextBlock>
 
+        <TextBlock Grid.Row="2" Text="AriphmeticConverter:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="Arithmetic1" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"  >
+            <TextBlock.Text>
+                <MultiBinding Converter="{converters:ArithmeticConverter}">
+                    <MultiBinding.ConverterParameter>
+                        <system:String>
+                            +
+                        </system:String>
+                    </MultiBinding.ConverterParameter>
+                    <MultiBinding.Bindings>
+                        <Binding>
+                            <Binding.Source>
+                                <system:Int32>
+                                    30
+                                </system:Int32>
+                            </Binding.Source>
+                        </Binding>
+                        <Binding>
+                            <Binding.Source>
+                                <system:Int32>
+                                    30
+                                </system:Int32>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding.Bindings>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+
+        <TextBlock Grid.Row="3" Text="OnOrderConverter:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"  >
+            <TextBlock.Text>
+                <MultiBinding Converter="{converters:OnOrderConverter}">
+                    <MultiBinding.ConverterParameter>
+                        <system:String>
+                            >
+                        </system:String>
+                    </MultiBinding.ConverterParameter>
+                    <MultiBinding.Bindings>
+                        <Binding>
+                            <Binding.Source>
+                                <system:Int32>
+                                    30
+                                </system:Int32>
+                            </Binding.Source>
+                        </Binding>
+                        <Binding>
+                            <Binding.Source>
+                                <system:Int32>
+                                    20
+                                </system:Int32>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding.Bindings>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+
+        <TextBlock Grid.Row="4" Text="LogicConverter:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"  >
+            <TextBlock.Text>
+                <MultiBinding Converter="{converters:LogicConverter}">
+                    <MultiBinding.ConverterParameter>
+                        <system:String>
+                            &amp;&amp;
+                        </system:String>
+                    </MultiBinding.ConverterParameter>
+                    <MultiBinding.Bindings>
+                        <Binding>
+                            <Binding.Source>
+                                <system:Boolean>
+                                    true
+                                </system:Boolean>
+                            </Binding.Source>
+                        </Binding>
+                        <Binding>
+                            <Binding.Source>
+                                <system:Boolean>
+                                    false
+                                </system:Boolean>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding.Bindings>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+
+        <!--Мultibinding inside Multibinding-->
+        <TextBlock Grid.Row="5" Text="BitwiseConverter:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"  >
+            <TextBlock.Text>
+                <MultiBinding Converter="{converters:BitwiseConverter}">
+                    <MultiBinding.ConverterParameter>
+                        <system:String>
+                            ^
+                        </system:String>
+                    </MultiBinding.ConverterParameter>
+                    <MultiBinding.Bindings>
+                        <Binding ElementName="Arithmetic1" Path="Text"/>
+                        <Binding>
+                            <Binding.Source>
+                                <system:Int32>
+                                    128
+                                </system:Int32>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding.Bindings>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+
+        <TextBlock Grid.Row="6" Text="NullCheckConverter:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="6" 
+                   Text="{Binding BoolFontSize, Converter={converters:NullCheckConverter}, Mode=OneWay}"
+                   Grid.Column="1" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   FontSize="30" 
+                    />
+
+        <TextBlock Grid.Row="7" Text="BoolConverter:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="7" 
+                   Text="BoolFontSize"
+                   Grid.Column="1" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   FontSize="{Binding BoolFontSize, Converter={converters:BoolConverter}, Mode=OneWay}" 
+                    >
+
+        </TextBlock>
     </Grid>
 </Window>

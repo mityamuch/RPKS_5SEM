@@ -10,6 +10,20 @@ namespace FIrstMVVMProg.Client.ViewModels
 
         private ICommand _exampleCommand;
         private bool _canExecute;
+        public bool _boolFontSize=false;
+        public bool BoolFontSize
+        {
+            get =>
+                _boolFontSize;
+            private set
+            {
+                _boolFontSize = true;
+                OnPropertiesChanged(nameof(BoolFontSize));
+            }
+        }
+
+
+
 
         public StartWindowViewModel()
         {

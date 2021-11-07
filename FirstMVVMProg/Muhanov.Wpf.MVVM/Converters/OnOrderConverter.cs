@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace Muhanov.Wpf.MVVM
 {
-    public sealed class EqualConverter : MultiValueConverterBase<EqualConverter>
+    public sealed class OnOrderConverter : MultiValueConverterBase<OnOrderConverter>
     {
         public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -29,10 +29,15 @@ namespace Muhanov.Wpf.MVVM
 
             switch (operation)
             {
-                case "==": return (leftOperand == rightOperand).ToString();
-                case "!=": return (leftOperand != rightOperand).ToString();
+                case ">": return (leftOperand > rightOperand).ToString();
+                case ">=": return (leftOperand >= rightOperand).ToString();
+                case "<": return (leftOperand < rightOperand).ToString();
+                case "<=": return (leftOperand <= rightOperand).ToString();
                 default: throw new ArgumentException("Invalid operation", nameof(operation));
             }
         }
+
+
+
     }
 }

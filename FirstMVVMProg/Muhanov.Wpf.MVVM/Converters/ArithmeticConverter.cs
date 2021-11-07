@@ -2,7 +2,7 @@ using Muhanov.Wpf.MVVM.Core;
 using System;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Media;
+
 
 namespace Muhanov.Wpf.MVVM
 {
@@ -31,11 +31,11 @@ namespace Muhanov.Wpf.MVVM
 
             switch (operation)
             {
-                case "+": return leftOperand + rightOperand;
-                case "-": return leftOperand - rightOperand;
-                case "*": return leftOperand * rightOperand;
-                case "/": return leftOperand / rightOperand;
-                case "%": return leftOperand % rightOperand;
+                case "+": return (leftOperand + rightOperand).ToString();
+                case "-": return (leftOperand - rightOperand).ToString();
+                case "*": return (leftOperand * rightOperand).ToString();
+                case "/": return (leftOperand / rightOperand).ToString();
+                case "%": return (leftOperand % rightOperand).ToString();
                 default: throw new ArgumentException("Invalid operation", nameof(operation));
             }
         }

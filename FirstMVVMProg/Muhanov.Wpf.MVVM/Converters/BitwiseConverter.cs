@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace Muhanov.Wpf.MVVM
 {
-    public sealed class EqualConverter : MultiValueConverterBase<EqualConverter>
+    public sealed class BitwiseConverter : MultiValueConverterBase<BitwiseConverter>
     {
         public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -24,13 +24,14 @@ namespace Muhanov.Wpf.MVVM
                 return DependencyProperty.UnsetValue;
             }
 
-            var leftOperand = (dynamic)values[0];
-            var rightOperand = (dynamic)values[1];
+            var leftOperand = System.Convert.ToInt32(values[0]);
+            var rightOperand = System.Convert.ToInt32(values[1]);
 
             switch (operation)
             {
-                case "==": return (leftOperand == rightOperand).ToString();
-                case "!=": return (leftOperand != rightOperand).ToString();
+                case "|": return (leftOperand | rightOperand).ToString();
+                case "&": return (leftOperand & rightOperand).ToString();
+                case "^": return (leftOperand ^ rightOperand).ToString();
                 default: throw new ArgumentException("Invalid operation", nameof(operation));
             }
         }
