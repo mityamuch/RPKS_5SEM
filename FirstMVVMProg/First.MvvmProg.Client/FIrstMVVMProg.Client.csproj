@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="images\**" />
+    <EmbeddedResource Remove="images\**" />
+    <None Remove="images\**" />
+    <Page Remove="images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Views\fon.png" />
     <None Remove="Views\VRF_32.ico" />
   </ItemGroup>
@@ -14,10 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Muhanov.Wpf.MVVM\Muhanov.Wpf.MVVM.csproj" />
     <ProjectReference Include="..\Wpf.MVVM.Core\Muhanov.Wpf.MVVM.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="images\" />
   </ItemGroup>
 
 </Project>
