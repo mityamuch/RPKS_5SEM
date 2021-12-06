@@ -1,60 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Controls.Primitives;
+
 
 namespace Muhanov.Wpf.Controls
 {
     public partial class NumericUpDown : UserControl
     {
-        private int _numValue = 0;
-        private int _step = 1;
 
-        public int NumValue
+        private RepeatButton _UpButton;
+        private RepeatButton _DownButton;
+        public readonly static DependencyProperty MaximumProperty=DependencyProperty.Register("Maximum", typeof(int), typeof(NumericUpDown), new UIPropertyMetadata(100));
+        public readonly static DependencyProperty MinimumProperty= DependencyProperty.Register("Minimum", typeof(int), typeof(NumericUpDown), new UIPropertyMetadata(0));
+        public readonly static DependencyProperty ValueProperty = DependencyProperty.Register("Step", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(1));
+        public readonly static DependencyProperty StepProperty= DependencyProperty.Register("Value", typeof(int), typeof(NumericUpDown), new FrameworkPropertyMetadata(0));
+        public  NumericUpDown()
         {
-            get { return _numValue; }
-            set
-            {
-                _numValue = value;
-                text.Text = value.ToString();
-            }
-        }
-
-        public int Step
-        {
-            get { return _step; }
-            set 
-            {
-                _step = value;
-            }
-        }
-
-        public NumericUpDown()
-        {
-            InitializeComponent();
             this.DataContext = this;
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
         }
 
-        private void UpButton_Click(object sender, RoutedEventArgs e)
+        public int Maximum
         {
-            _numValue += _step;
-            text.Text = _numValue.ToString();
-
+            get { return (int)GetValue(MaximumProperty); }
+            set { SetValue(MaximumProperty, value); }
+        }
+        public int Minimum
+        {
+            get { return (int)GetValue(MinimumProperty); }
+            set { SetValue(MinimumProperty, value); }
+        }
+        public int Value
+        {
+            get { return (int)GetValue(ValueProperty); }
+            set { SetCurrentValue(ValueProperty, value); }
+        }
+        public int StepValue
+        {
+            get { return (int)GetValue(StepProperty); }
+            set { SetValue(StepProperty, value); }
         }
 
-        private void DownButton_Click(object sender, RoutedEventArgs e)
+        public override void OnApplyTemplate()
         {
-            _numValue -= _step;
-            text.Text = _numValue.ToString();
+            base.OnApplyTemplate();
+            _UpButton = Template.FindName("Part_UpButton", this) as RepeatButton;
+            _DownButton = Template.FindName("Part_DownButton", this) as RepeatButton;
+            _UpButton.Click += UpButton_Click;
+            _DownButton.Click += DownButton_Click;
+        }
 
+        void DownButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Value > Minimum)
+            {
+                Value -= StepValue;
+                if (Value < Minimum)
+                    Value = Minimum;
+            }
+        }
+
+        void UpButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Value < Maximum)
+            {
+                Value += StepValue;
+                if (Value > Maximum)
+                    Value = Maximum;
+            }
         }
     }
 }

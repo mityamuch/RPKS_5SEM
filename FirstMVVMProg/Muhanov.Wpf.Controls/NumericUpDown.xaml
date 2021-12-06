@@ -3,36 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Muhanov.Wpf.Controls"
+             xmlns:num="clr-namespace:Muhanov.Wpf.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="150" >
-    <Border CornerRadius="10,10,10,10" Background="FloralWhite">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="0.5*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
+             Height="200" Width="300"  >
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Muhanov.Wpf.Controls;component/NumericUpDownDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-            <TextBlock x:Name="text"  Grid.RowSpan="2" 
-                       Text="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:NumericUpDown}},Path=NumValue}"
-                       HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontFamily="Arial Black"  ></TextBlock>
+    <Border CornerRadius="50" Background="LightBlue">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
 
-            <Button Grid.Column="1" Grid.Row="0" Background="FloralWhite" BorderThickness="0" Name="UpButton" Click="UpButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Muhanov.Wpf.Controls;component/Assets/up.ico" />
-                </StackPanel>
-            </Button>
+            <num:NumericUpDown x:Name="updown" Grid.Column="1" StepValue="1" Maximum="100" Minimum="0" Value="5"></num:NumericUpDown>
 
-            <Button Grid.Column="1" Grid.Row="1" Background="FloralWhite"  BorderThickness="0"  Name="DownButton" Click="DownButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Muhanov.Wpf.Controls;component/Assets/down.ico" />
-
-                </StackPanel>
-            </Button>
-        </Grid>
+            <TextBlock    Text="{Binding ElementName=updown, Path=Value}"   VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="48"></TextBlock>
+    </Grid>
     </Border>
 </UserControl>
