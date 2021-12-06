@@ -19,7 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Muhanov.Wpf.Controls\Muhanov.Wpf.Controls.csproj" />
     <ProjectReference Include="..\Muhanov.Wpf.MVVM\Muhanov.Wpf.MVVM.csproj" />
+    <ProjectReference Include="..\Muhanov.Wpf.Styles\Muhanov.Wpf.Styles.csproj" />
     <ProjectReference Include="..\Wpf.MVVM.Core\Muhanov.Wpf.MVVM.Core.csproj" />
   </ItemGroup>
 

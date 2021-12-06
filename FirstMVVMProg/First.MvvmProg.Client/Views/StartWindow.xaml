@@ -6,9 +6,21 @@
         xmlns:local="clr-namespace:FIrstMVVMProg.Client"
         mc:Ignorable="d"
         xmlns:converters="clr-namespace:Muhanov.Wpf.MVVM;assembly=Muhanov.Wpf.MVVM"
+        xmlns:attached="clr-namespace:FIrstMVVMProg.Client.Views.Attached"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:viewModels="clr-namespace:FIrstMVVMProg.Client.ViewModels"
-        Title="StartWindow" Height="700" Width="800" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" >
+        xmlns:CustControls="clr-namespace:Muhanov.Wpf.Controls;assembly=Muhanov.Wpf.Controls"
+        
+        Title="StartWindow" Height="700" Width="800" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" Background="CadetBlue" >
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ScrollViewer.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Window.DataContext>
         <viewModels:StartWindowViewModel />
     </Window.DataContext>
@@ -26,17 +38,36 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition> 
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+
+        <ScrollViewer Style="{StaticResource MyScrollViewer}" Grid.Row="0" Grid.Column="3"  Grid.RowSpan="2" attached:ScrollViewAttachedProperties.ThumbBackground="Red"  attached:ScrollViewAttachedProperties.TrackBackground="Yellow">
+            <RichTextBox/>
+        </ScrollViewer>
+
+
+        <CustControls:NumericUpDown Grid.Column="3" Grid.Row="4" ></CustControls:NumericUpDown>
 
         <Button 
             Grid.Column="1" 
             Grid.Row="0" 
             Grid.ColumnSpan="2"
             Content="КНОПКА" 
-            Command="{Binding ExampleCommand}">
+            
+            attached:ButtonAtachedProperties.Fontfaamily ="Algerian"
+            
+            attached:ButtonAtachedProperties.EnabledBackGround="Green"
+            attached:ButtonAtachedProperties.EnabledForeGround="Yellow"
+            IsEnabled="True"
+            attached:ButtonAtachedProperties.NotEnabledBackGround="Red"
+            attached:ButtonAtachedProperties.NotEnabledForeGround="Black"
+            Foreground="Black"
+            Command="{Binding ExampleCommand}"
+            Template="{StaticResource btTemplate}"
+            >
         </Button>
+        
         <TextBlock Grid.Row="1" Text="EqualConverter:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"  >
             <TextBlock.Text>

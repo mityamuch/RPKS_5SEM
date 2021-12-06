@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:attached="clr-namespace:FIrstMVVMProg.Client.Views.Attached">
+
+    <ControlTemplate TargetType="Button" x:Key="btTemplate">
+        <Border x:Name="buttonBorder" CornerRadius="25"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Background="{TemplateBinding Background}"
+                Height="{TemplateBinding Height}"
+                Width="{TemplateBinding Width}" 
+                >
+            <ContentControl x:Name="bt" Margin="{TemplateBinding Padding}"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Content="{TemplateBinding Content}" 
+                    FontFamily="{ Binding Path=(attached:ButtonAtachedProperties.Fontfaamily), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}} }"      
+                            />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="bt" Property="Foreground" Value="{ Binding Path=(attached:ButtonAtachedProperties.NotEnabledForeGround), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}} }"/>
+                <Setter TargetName="buttonBorder" Property="Background" Value="{ Binding Path=(attached:ButtonAtachedProperties.NotEnabledBackGround), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}} }"/>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="true">
+                <Setter TargetName="bt"  Property="Foreground" Value="{ Binding Path=(attached:ButtonAtachedProperties.EnabledForeGround), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}} }"/>
+                <Setter TargetName="buttonBorder" Property="Background" Value="{ Binding Path=(attached:ButtonAtachedProperties.EnabledBackGround), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}} }"/>
+            </Trigger>
+
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

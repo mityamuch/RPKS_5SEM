@@ -5,4 +5,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\down.ico" />
+    <None Remove="Assets\up.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\down.ico" />
+    <Resource Include="Assets\up.ico" />
+  </ItemGroup>
+
 </Project>
