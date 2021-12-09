@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-
+             xmlns:local="clr-namespace:FIrstMVVMProg.Client.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100">
     <Grid>
@@ -15,7 +15,10 @@
             <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
                     <Storyboard>
-                        <DoubleAnimation Storyboard.TargetProperty="(Canvas.RenderTransform).(RotateTransform.Angle)" To="360" Duration="0:0:3" RepeatBehavior="Forever" />
+                            <DoubleAnimation Storyboard.TargetProperty="(Canvas.RenderTransform).(RotateTransform.Angle)" 
+                                             To="{Binding Direction, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Spinner}}}" 
+                                             Duration="{Binding Speed, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Spinner}}}" 
+                                             RepeatBehavior="Forever" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>

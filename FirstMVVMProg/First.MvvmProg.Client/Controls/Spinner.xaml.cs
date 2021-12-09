@@ -17,8 +17,8 @@ namespace FIrstMVVMProg.Client.Controls
     {
         public enum direction
         {
-            Clockwise,
-            Counterclockwise
+            Clockwise=360,
+            Counterclockwise=-360
         }
 
         public Spinner()
@@ -78,34 +78,39 @@ namespace FIrstMVVMProg.Client.Controls
         }
         #endregion
         #region Direction
-        public static DependencyProperty DirectionProperty = DependencyProperty.Register(nameof(Direction), typeof(direction), typeof(Spinner), new UIPropertyMetadata(direction.Counterclockwise, PropertyChangedCallback, CoerceDirectionValue));
-        public direction Direction
+        public static DependencyProperty DirectionProperty = DependencyProperty.Register(nameof(Direction), typeof(int), typeof(Spinner), new UIPropertyMetadata((int)direction.Counterclockwise, PropertyChangedCallback, CoerceDirectionValue));
+        public int Direction
         {
-            get { return (direction)GetValue(DirectionProperty); }
-            set { SetValue(DirectionProperty, value); }
+            get { return (int)GetValue(DirectionProperty); }
+            set { SetValue(DirectionProperty,value); }
         }
         private static object CoerceDirectionValue(DependencyObject d, object baseValue)
         {
             var spinner = (Spinner)d;
-            direction value = direction.Counterclockwise;
+            int value = Convert.ToInt32(baseValue);
+            value = Math.Max(-360, value);
+            value = Math.Min(360, value);
             return value;
         }
 
 
         #endregion 
         #region Speed
-        public static DependencyProperty SpeedProperty = DependencyProperty.Register(nameof(Speed), typeof(int), typeof(Spinner), new UIPropertyMetadata(8, PropertyChangedCallback, CoerceSpeedValue));
-        public int Speed
+        public static DependencyProperty SpeedProperty = DependencyProperty.Register(nameof(Speed), typeof(string), typeof(Spinner), new UIPropertyMetadata("0:0:3", PropertyChangedCallback, CoerceSpeedValue));
+        public string Speed
         {
-            get { return (int)GetValue(SpeedProperty); }
+            get { return (string)GetValue(SpeedProperty); }
             set { SetValue(SpeedProperty, value); }
         }
         private static object CoerceSpeedValue(DependencyObject d, object baseValue)
         {
             var spinner = (Spinner)d;
-            int value = Convert.ToInt32(baseValue);
-            value = Math.Max(1, value);
-            value = Math.Min(59, value);
+            string value = Convert.ToString(baseValue);
+            string[] words = value.Split(new char[] { ':' });
+            int digit = Convert.ToInt32(words[2]);
+            digit = Math.Max(1,digit);
+            digit = Math.Min(59, digit);
+            value = "0:0:" + digit.ToString();
             return value;
         }
 
