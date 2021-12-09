@@ -33,26 +33,27 @@ namespace FIrstMVVMProg.Client.Controls
             typeof(SampleControl),
             new FrameworkPropertyMetadata(0,
             FrameworkPropertyMetadataOptions.None,
-            new PropertyChangedCallback(OnValueChanged),
-            new CoerceValueCallback( CoerceValue)),
-            new ValidateValueCallback(IsValidateValue)
-            );
+            PropertyChangedCallback,
+            CoerceValue),
+            IsValidateValue );
 
 
 
-        private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void PropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             Console.WriteLine("ValueChanged new value is {0}", e.NewValue);
         }
 
-        private  object CoerceValue(DependencyObject d, object value)
+        private static  object CoerceValue(DependencyObject d, object value)
         {
+            /*
             if ((int)value >= (int)GetValue(MaximumProperty))
                 value = GetValue(MaximumProperty);
             else if ((int)value <= (int)GetValue(MinimumProperty))
                 value = GetValue(MinimumProperty);
+            
+            */
             return value;
-
         }
 
         private static bool IsValidateValue(object value)
