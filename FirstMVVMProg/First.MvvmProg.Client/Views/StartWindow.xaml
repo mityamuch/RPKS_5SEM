@@ -9,9 +9,9 @@
         xmlns:attached="clr-namespace:FIrstMVVMProg.Client.Views.Attached"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:viewModels="clr-namespace:FIrstMVVMProg.Client.ViewModels"
-        xmlns:CustControls="clr-namespace:Muhanov.Wpf.Controls;assembly=Muhanov.Wpf.Controls"
+        xmlns:SampleControls="clr-namespace:FIrstMVVMProg.Client.Controls"
         
-        Title="StartWindow" Height="700" Width="800" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" Background="CadetBlue" >
+        Title="StartWindow" Height="800" Width="800" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" Background="CadetBlue" >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -42,12 +42,12 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
+        <SampleControls:SampleControl Grid.Column="2" Grid.Row="2" Minimum="-10" Maximum="10" Value="2" StepValue="2"/>
+
+
         <ScrollViewer Style="{StaticResource MyScrollViewer}" Grid.Row="0" Grid.Column="3"  Grid.RowSpan="2" attached:ScrollViewAttachedProperties.ThumbBackground="Red"  attached:ScrollViewAttachedProperties.TrackBackground="Yellow">
             <RichTextBox/>
         </ScrollViewer>
-
-
-        <CustControls:NumericUpDown  Grid.Column="3" Grid.Row="4" StepValue="1" Maximum="100"  Minimum="0" Value="5" ></CustControls:NumericUpDown>
 
         <Button 
             Grid.Column="1" 

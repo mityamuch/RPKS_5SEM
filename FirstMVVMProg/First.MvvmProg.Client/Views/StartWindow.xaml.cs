@@ -10,7 +10,6 @@ namespace FIrstMVVMProg.Client
         {
             InitializeComponent();
         }
-
     }
 
 }

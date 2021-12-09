@@ -9,10 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIrstMVVMProg.Client", "Fir
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Muhanov.Wpf.MVVM", "Muhanov.Wpf.MVVM\Muhanov.Wpf.MVVM.csproj", "{C16601D3-FC46-4262-9090-4191D9D5F187}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muhanov.Wpf.Controls", "Muhanov.Wpf.Controls\Muhanov.Wpf.Controls.csproj", "{DCB72F7F-D21E-49F3-819A-C5470871A57C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muhanov.Wpf.Styles", "Muhanov.Wpf.Styles\Muhanov.Wpf.Styles.csproj", "{02B8FA2C-6751-4B04-ACD0-A3C0102B5E81}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,14 +27,6 @@ Global
 		{C16601D3-FC46-4262-9090-4191D9D5F187}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C16601D3-FC46-4262-9090-4191D9D5F187}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C16601D3-FC46-4262-9090-4191D9D5F187}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCB72F7F-D21E-49F3-819A-C5470871A57C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCB72F7F-D21E-49F3-819A-C5470871A57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCB72F7F-D21E-49F3-819A-C5470871A57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCB72F7F-D21E-49F3-819A-C5470871A57C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{02B8FA2C-6751-4B04-ACD0-A3C0102B5E81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{02B8FA2C-6751-4B04-ACD0-A3C0102B5E81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{02B8FA2C-6751-4B04-ACD0-A3C0102B5E81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{02B8FA2C-6751-4B04-ACD0-A3C0102B5E81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
