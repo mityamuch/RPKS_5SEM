@@ -11,7 +11,7 @@
         xmlns:viewModels="clr-namespace:FIrstMVVMProg.Client.ViewModels"
         xmlns:SampleControls="clr-namespace:FIrstMVVMProg.Client.Controls"
         
-        Title="StartWindow" Height="800" Width="800" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" Background="CadetBlue" >
+        Title="StartWindow" Height="1080" Width="1920" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" Background="CadetBlue" >
 
     <Window.Resources>
         <ResourceDictionary>
@@ -42,32 +42,32 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition> 
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <SampleControls:SampleControl Grid.Column="2" Grid.Row="3" Minimum="-10" Maximum="10" Value="2" StepValue="2"/>
-        <SampleControls:Spinner Direction="360" Speed="0:0:5" Balls="8" BallBrush="Purple"  Grid.Column="3" Grid.Row="3" BallSize="20" Width="180" Height="90"/>
-        <SampleControls:NumericKeyboard ButtonStyle="{StaticResource CalcStyle}" ButtonCommand="{Binding NumTextChangeCommand}"  Grid.Row="5" Grid.Column="2" Grid.RowSpan="2" Height="200" Width="150"></SampleControls:NumericKeyboard>
-        <TextBlock Text="{Binding text, Mode=OneWay}" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"></TextBlock>
-        <SampleControls:LetterKeyboard ButtonStyle="{StaticResource CalcStyle}" Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" Height="200" Width="200" ButtonCommand="{Binding LetTextChangeCommand}" ></SampleControls:LetterKeyboard>
+        <SampleControls:SampleControl Grid.Column="2" Grid.Row="2" Minimum="-10" Maximum="10" Value="2" StepValue="2" Height="100" Width="150"/>
+        <SampleControls:Spinner Direction="360" Speed="0:0:5" Balls="8" BallBrush="Purple"  Grid.Column="3" Grid.Row="2" BallSize="20" Width="180" Height="90"/>
+        <SampleControls:NumericKeyboard ButtonStyle="{StaticResource CalcStyle}" ButtonCommand="{Binding NumTextChangeCommand}"  Grid.Row="4" Grid.Column="2" Grid.RowSpan="2" Height="200" Width="150"></SampleControls:NumericKeyboard>
+        <TextBlock Text="{Binding text, Mode=OneWay}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"></TextBlock>
+        <SampleControls:LetterKeyboard ButtonStyle="{StaticResource CalcStyle}" Grid.Row="4" Grid.Column="3" Grid.RowSpan="2" Height="200" Width="200" ButtonCommand="{Binding LetTextChangeCommand}" ></SampleControls:LetterKeyboard>
 
-        <SampleControls:DialogHost Height="100" Width="100" Grid.Column="2" Grid.Row="1" OpacityBorder="0.99" CornRadius="150,150,150,150">
-            <Label Background="Wheat">User supplied content here</Label>
+        <SampleControls:DialogHost Height="100" Width="100" Grid.Column="2" Grid.Row="1" OpacityBorder="0.9" CornRadius="150,150,150,150" ClickCommand="{Binding ExampleCommand}" >
+            <Label Content="       Content"></Label>
         </SampleControls:DialogHost>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+        <SampleControls:LoadingDialog LoadingForegroundColor="Blue" LoadingDialogText="Загрузка" LoadingFontSize="30" Grid.Column="2" Grid.Row="6" Grid.RowSpan="2"   />
+
+        <SampleControls:MessageDialog ButtonType="YesNo"  Grid.Column="3" Grid.Row="6" Grid.RowSpan="2"></SampleControls:MessageDialog>
+
+
+
+
+
+
+
+
+
         <ScrollViewer Style="{StaticResource MyScrollViewer}" Grid.Row="0" Grid.Column="3"  Grid.RowSpan="2" attached:ScrollViewAttachedProperties.ThumbBackground="Red"  attached:ScrollViewAttachedProperties.TrackBackground="Yellow">
             <RichTextBox/>
         </ScrollViewer>
@@ -90,7 +90,7 @@
             Template="{StaticResource btTemplate}"
             >
         </Button>
-        
+
         <TextBlock Grid.Row="1" Text="EqualConverter:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"  >
             <TextBlock.Text>

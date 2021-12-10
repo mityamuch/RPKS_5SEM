@@ -8,7 +8,7 @@
              d:DesignHeight="100" d:DesignWidth="100" >
 
     <UserControl.Template>
-        <ControlTemplate>
+        <ControlTemplate TargetType="{x:Type UserControl}">
         <Grid Background="Black">
                 <Border 
                     Background="White"  

@@ -6,53 +6,48 @@
              xmlns:local="clr-namespace:FIrstMVVMProg.Client.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Template>
-        <ControlTemplate>
-            <Grid>
-                <local:DialogHost       Height="250"
+    <Grid>
+        <local:DialogHost       Height="250"
                                         Width="250"
-                                        OpacityBorder="0.7"
+                                        OpacityBorder="0.99"
                                         CornRadius="20"
                                         VerticalAlignment="Center">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="30" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="10" />
+                </Grid.RowDefinitions>
 
 
-                        <local:Spinner Grid.Column="1"
+                <local:Spinner Grid.Column="1"
                                           Grid.Row="1"
                                           BallBrush="Blue"
                                           Balls="6"
                                           Direction="360"
                                           BallSize="15">
-                        </local:Spinner>
+                </local:Spinner>
 
-                        <TextBlock  Grid.Column="0" 
+                <Label  Grid.Column="0" 
                                 Grid.Row="2"
                                 Grid.ColumnSpan="3"
-                                HorizontalAlignment="Center"
-                                Margin="10 50 10 0"
-                                TextWrapping="Wrap"
-                                Text="{Binding LoadingDialogText, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LoadingDialog}}}"
+                                HorizontalAlignment="Center"  
+                                Content="{Binding LoadingDialogText, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LoadingDialog}}}"
                                 FontSize="{Binding LoadingFontSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LoadingDialog}}}"
                                 FontFamily="{Binding LoadingFontFamily, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LoadingDialog}}}"
                                 FontWeight="{Binding LoadingFontWeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LoadingDialog}}}"
-                                Foreground="{Binding LoadingForegroundColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LoadingDialog}}}"
+                                Foreground="{Binding LoadingForegroundColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LoadingDialog}}}" VerticalAlignment="Center" 
                          />
 
 
-                    </Grid>
-                </local:DialogHost>
             </Grid>
-        </ControlTemplate>
-    </UserControl.Template>
+        </local:DialogHost>
+    </Grid>
 
 </UserControl>

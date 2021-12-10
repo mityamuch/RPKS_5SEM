@@ -19,8 +19,10 @@ namespace FIrstMVVMProg.Client.Controls
         {
             InitializeComponent();
         }
-        public static readonly DependencyProperty LoadingForegroundColorProperty = DependencyProperty.Register(
-            nameof(LoadingForegroundColor), typeof(Brush), typeof(LoadingDialog));
+
+        public static  DependencyProperty LoadingForegroundColorProperty = DependencyProperty.Register(
+            nameof(LoadingForegroundColor), typeof(Brush), typeof(LoadingDialog),new PropertyMetadata(Brushes.Black));
+
         public Brush LoadingForegroundColor
         {
             get =>
@@ -30,8 +32,9 @@ namespace FIrstMVVMProg.Client.Controls
                 SetValue(LoadingForegroundColorProperty, value);
         }
 
-        public static readonly DependencyProperty LoadingFontSizeProperty = DependencyProperty.Register(
-            nameof(LoadingFontSize), typeof(double), typeof(LoadingDialog), new PropertyMetadata(30d));
+        public static  DependencyProperty LoadingFontSizeProperty = DependencyProperty.Register(
+            nameof(LoadingFontSize), typeof(double), typeof(LoadingDialog), new PropertyMetadata(24d));
+
         public double LoadingFontSize
         {
             get =>
@@ -41,8 +44,9 @@ namespace FIrstMVVMProg.Client.Controls
                 SetValue(LoadingFontSizeProperty, value);
         }
 
-        public static readonly DependencyProperty LoadingFontWeightProperty = DependencyProperty.Register(
+        public static  DependencyProperty LoadingFontWeightProperty = DependencyProperty.Register(
             nameof(LoadingFontWeight), typeof(FontWeight), typeof(LoadingDialog));
+
         public FontWeight LoadingFontWeight
         {
             get =>
@@ -52,8 +56,9 @@ namespace FIrstMVVMProg.Client.Controls
                 SetValue(LoadingFontWeightProperty, value);
         }
 
-        public static readonly DependencyProperty LoadingFontFamilyProperty = DependencyProperty.Register(
+        public static  DependencyProperty LoadingFontFamilyProperty = DependencyProperty.Register(
             nameof(LoadingFontFamily), typeof(FontFamily), typeof(LoadingDialog), new PropertyMetadata(new FontFamily("Arial")));
+
         public FontFamily LoadingFontFamily
         {
             get =>
@@ -63,15 +68,20 @@ namespace FIrstMVVMProg.Client.Controls
                 SetValue(LoadingFontFamilyProperty, value);
         }
 
-        public static readonly DependencyProperty LoadingDialogTextProperty = DependencyProperty.Register(
+        public static DependencyProperty LoadingDialogTextProperty = DependencyProperty.Register(
             nameof(LoadingDialogText), typeof(string), typeof(LoadingDialog), new PropertyMetadata("Please wait..."));
+
         public string LoadingDialogText
         {
-            get =>
-                (string)GetValue(LoadingDialogTextProperty);
+            get 
+            { 
+                return (string)GetValue(LoadingDialogTextProperty); 
+            }
 
-            set =>
+            set
+            {
                 SetValue(LoadingDialogTextProperty, value);
+            }
         }
     }
 }
