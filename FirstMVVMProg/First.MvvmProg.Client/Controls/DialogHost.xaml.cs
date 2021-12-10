@@ -32,7 +32,7 @@ namespace FIrstMVVMProg.Client.Controls
         }
         #endregion
         #region Opacity
-        public static DependencyProperty OpacityBorderProperty = DependencyProperty.Register(nameof(OpacityBorder), typeof(double), typeof(DialogHost), new UIPropertyMetadata("0.4"));
+        public static DependencyProperty OpacityBorderProperty = DependencyProperty.Register(nameof(OpacityBorder), typeof(double), typeof(DialogHost), new UIPropertyMetadata(0.4));
         public double OpacityBorder
         {
             get { return (double)GetValue(OpacityBorderProperty); }

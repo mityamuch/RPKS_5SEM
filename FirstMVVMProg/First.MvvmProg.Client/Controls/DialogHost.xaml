@@ -5,24 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FIrstMVVMProg.Client.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="100" Background="Black">
-    <!-- 
+             d:DesignHeight="100" d:DesignWidth="100" >
+
     <UserControl.Template>
-        <ControlTemplate  TargetType="{x:Type local:DialogHost}">
-            <ContentPresenter />
+        <ControlTemplate>
+        <Grid Background="Black">
+                <Border 
+                    Background="White"  
+                    CornerRadius="{Binding CornRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DialogHost}}}" 
+                    Opacity="{Binding OpacityBorder, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DialogHost}}}" >
+                        <ContentPresenter MouseLeftButtonDown="OnClick" ></ContentPresenter>
+                </Border>
+            </Grid>
         </ControlTemplate>
     </UserControl.Template>
-    -->
+    
 
-    <Grid >
-        <Border 
-            Background="White"  
-            CornerRadius="{Binding CornRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DialogHost}}}" 
-            Opacity="{Binding OpacityBorder, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DialogHost}}}" >
-            <Rectangle MouseLeftButtonDown="OnClick" >
-                
-            </Rectangle>
-         
-        </Border>
-    </Grid>
+    
 </UserControl>
