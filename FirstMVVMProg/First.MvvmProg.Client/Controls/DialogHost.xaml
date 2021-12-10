@@ -6,13 +6,22 @@
              xmlns:local="clr-namespace:FIrstMVVMProg.Client.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" Background="Black">
+    <!-- 
+    <UserControl.Template>
+        <ControlTemplate  TargetType="{x:Type local:DialogHost}">
+            <ContentPresenter />
+        </ControlTemplate>
+    </UserControl.Template>
+    -->
 
-
-
-
-    <Grid>
-        <Border Background="White" CornerRadius="100" Opacity="0.7">
-            
+    <Grid >
+        <Border 
+            Background="White"  
+            CornerRadius="{Binding CornRadius, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DialogHost}}}" 
+            Opacity="{Binding OpacityBorder, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:DialogHost}}}" >
+            <Rectangle MouseLeftButtonDown="OnClick" >
+                
+            </Rectangle>
          
         </Border>
     </Grid>
