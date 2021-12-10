@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Markup;
 using Muhanov.Wpf.MVVM.Core;
 
 
-namespace Muhanov.Wpf.MVVM.Converters
+namespace Muhanov.Wpf.MVVM
 {
     public enum TypeButtons
     {
@@ -17,12 +18,12 @@ namespace Muhanov.Wpf.MVVM.Converters
     }
 
 
-    public sealed class ButtonTypeConverter : ValueConverterBase<ButtonTypeConverter>
+    public class ButtonTypeConverter : ValueConverterBase<ButtonTypeConverter>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            TypeButtons type = ((TypeButtons)value);
-            ParamType param = (ParamType)parameter;
+            TypeButtons type = (TypeButtons)((int)value);
+            ParamType param = (ParamType)System.Convert.ToInt32(parameter);
             switch (type)
             {
                 case TypeButtons.Ok:

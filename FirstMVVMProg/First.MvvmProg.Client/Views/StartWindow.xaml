@@ -56,9 +56,9 @@
             <Label Content="       Content"></Label>
         </SampleControls:DialogHost>
 
-        <SampleControls:LoadingDialog LoadingForegroundColor="Blue" LoadingDialogText="Загрузка" LoadingFontSize="30" Grid.Column="2" Grid.Row="6" Grid.RowSpan="2"   />
+        <SampleControls:LoadingDialog LoadingForegroundColor="Blue" LoadingDialogText="Загрузка" LoadingFontSize="30" Grid.Column="2" Grid.Row="6" Grid.RowSpan="2"    />
 
-        <SampleControls:MessageDialog ButtonType="YesNo"  Grid.Column="3" Grid.Row="6" Grid.RowSpan="2"></SampleControls:MessageDialog>
+        <SampleControls:MessageDialog ButtonType="YesNo"  Grid.Column="3" Grid.Row="6" Grid.RowSpan="2" ButtonStyle="{StaticResource CalcStyle}" ScrollStyle="{StaticResource MyScrollViewer}"></SampleControls:MessageDialog>
 
 
 

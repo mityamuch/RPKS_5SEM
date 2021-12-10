@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Muhanov.Wpf.MVVM.Converters;
+using Muhanov.Wpf.MVVM;
 
 
 namespace FIrstMVVMProg.Client.Controls
@@ -78,7 +78,7 @@ namespace FIrstMVVMProg.Client.Controls
 
         #region TypeButton
         public static DependencyProperty ButtonTypeProperty = DependencyProperty.Register(
-   nameof(ButtonType), typeof(TypeButtons), typeof(MessageDialog), new PropertyMetadata(TypeButtons.OkCancel));
+   nameof(ButtonType), typeof(TypeButtons), typeof(MessageDialog), new PropertyMetadata((TypeButtons.OkCancel)));
 
         public TypeButtons ButtonType
         {
@@ -87,8 +87,6 @@ namespace FIrstMVVMProg.Client.Controls
 
             set
             {
-               
-
                 SetValue(ButtonTypeProperty, value);
             }
         }
