@@ -34,10 +34,15 @@ namespace FIrstMVVMProg.Client.ViewModels
             }
         }
 
-        private ICommand _textChangeCommand;
+        private ICommand _NumtextChangeCommand;
+        private ICommand _LettextChangeCommand;
 
-        public ICommand TextChangeCommand =>
-            _textChangeCommand ??= new RelayCommand(x => TextChange((string)x));
+        public ICommand NumTextChangeCommand =>
+            _NumtextChangeCommand ??= new RelayCommand(x => NumTextChange((string)x));
+
+        public ICommand LetTextChangeCommand =>
+           _LettextChangeCommand ??= new RelayCommand(x => LetTextChange((string)x));
+
 
         public StartWindowViewModel()
         {
@@ -62,7 +67,7 @@ namespace FIrstMVVMProg.Client.ViewModels
             MessageBox.Show("Привет чувак");
         }
 
-        private void TextChange(string number)
+        private void NumTextChange(string number)
         {
             if (number == "C")
             {
@@ -71,6 +76,19 @@ namespace FIrstMVVMProg.Client.ViewModels
             else
             {
                 text+=Convert.ToInt32(number);
+            }
+
+        }
+
+        private void LetTextChange(string letter)
+        {
+            if (letter == "Del")
+            {
+                text = "";
+            }
+            else
+            {
+                text += letter;
             }
 
         }

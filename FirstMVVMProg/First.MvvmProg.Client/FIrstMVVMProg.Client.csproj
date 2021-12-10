@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Controls\language_world_icon_132780.ico" />
     <None Remove="Views\fon.png" />
     <None Remove="Views\VRF_32.ico" />
   </ItemGroup>
@@ -21,6 +22,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Muhanov.Wpf.MVVM\Muhanov.Wpf.MVVM.csproj" />
     <ProjectReference Include="..\Wpf.MVVM.Core\Muhanov.Wpf.MVVM.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Controls\language_world_icon_132780.ico" />
   </ItemGroup>
 
   <ItemGroup>

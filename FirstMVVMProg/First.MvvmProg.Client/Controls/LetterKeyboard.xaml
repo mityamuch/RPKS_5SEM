@@ -3,9 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FIrstMVVMProg.Client.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="200" d:DesignWidth="200">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Content="q" x:Name="btnq" Grid.Column="0" Grid.Row="0" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+        <Button Content="a" x:Name="btna" Grid.Column="0" Grid.Row="1" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+        <Button Content="z" x:Name="btnz" Grid.Column="0" Grid.Row="2" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+
+
+        <Button Content="w" x:Name="btnw" Grid.Column="1" Grid.Row="0" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+        <Button Content="s" x:Name="btns" Grid.Column="1" Grid.Row="1" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+        <Button Content="x" x:Name="btnx" Grid.Column="1" Grid.Row="2" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+        <Button Content="Caps" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Height="40" Width="90" FontSize="20"  Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" FontWeight="Bold" Click="CapsOnClick"></Button>
+
+        <Button Content="e" x:Name="btne" Grid.Column="2" Grid.Row="0" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+        <Button Content="d" x:Name="btnd" Grid.Column="2" Grid.Row="1" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+        <Button Content="c" x:Name="btnc" Grid.Column="2" Grid.Row="2" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+        <Button Content="Del" Grid.Column="2" Grid.Row="3" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+
+        <Button Content="r" x:Name="btnr" Grid.Column="3" Grid.Row="0" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+        <Button Content="f" x:Name="btnf" Grid.Column="3" Grid.Row="1" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+        <Button Content="v" x:Name="btnv" Grid.Column="3" Grid.Row="2" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="OnClick"></Button>
+        <Button  Grid.Column="3" Grid.Row="3" Height="40" Width="40" FontSize="20" FontWeight="Bold" Style="{Binding ButtonStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:LetterKeyboard}}}" Click="LanguageOnClick">
+            <StackPanel>
+                <Image Source="/Controls/language_world_icon_132780.ico" Height="30" Width="30" ></Image>
+            </StackPanel>
+        </Button>
     </Grid>
 </UserControl>
