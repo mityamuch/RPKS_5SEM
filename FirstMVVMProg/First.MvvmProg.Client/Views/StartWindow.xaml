@@ -18,6 +18,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ScrollViewer.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="CalcStyle" TargetType="Button">
+                <Setter Property="Foreground"  Value="White"/>
+                <Setter Property="Background"  Value="Pink"/>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -42,10 +46,10 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <SampleControls:SampleControl Grid.Column="2" Grid.Row="2" Minimum="-10" Maximum="10" Value="2" StepValue="2"/>
-        <SampleControls:Spinner Direction="360" Speed="0:0:1" Balls="10" BallBrush="Purple"  Grid.Column="3" Grid.Row="3" BallSize="20" Width="180" Height="90"/>
-        
-        
+        <SampleControls:SampleControl Grid.Column="2" Grid.Row="3" Minimum="-10" Maximum="10" Value="2" StepValue="2"/>
+        <SampleControls:Spinner Direction="360" Speed="0:0:5" Balls="8" BallBrush="Purple"  Grid.Column="3" Grid.Row="3" BallSize="20" Width="180" Height="90"/>
+        <SampleControls:NumericKeyboard ButtonStyle="{StaticResource CalcStyle}" ButtonCommand="{Binding TextChangeCommand}"  Grid.Row="5" Grid.Column="2" Grid.RowSpan="2" Height="200" Width="150"></SampleControls:NumericKeyboard>
+        <TextBlock Text="{Binding text, Mode=OneWay}" Grid.Row="4" Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"></TextBlock>
 
         <ScrollViewer Style="{StaticResource MyScrollViewer}" Grid.Row="0" Grid.Column="3"  Grid.RowSpan="2" attached:ScrollViewAttachedProperties.ThumbBackground="Red"  attached:ScrollViewAttachedProperties.TrackBackground="Yellow">
             <RichTextBox/>

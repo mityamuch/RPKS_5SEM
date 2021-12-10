@@ -46,13 +46,13 @@ namespace FIrstMVVMProg.Client.Controls
 
         private static  object CoerceValue(DependencyObject d, object value)
         {
-            /*
-            if ((int)value >= (int)GetValue(MaximumProperty))
-                value = GetValue(MaximumProperty);
-            else if ((int)value <= (int)GetValue(MinimumProperty))
-                value = GetValue(MinimumProperty);
+
+            if ((int)value >= (d as SampleControl).Maximum) 
+                value = (d as SampleControl).Maximum;
+            else if ((int)value <= (d as SampleControl).Minimum)
+                value = (d as SampleControl).Minimum;
             
-            */
+            
             return value;
         }
 
@@ -93,22 +93,14 @@ namespace FIrstMVVMProg.Client.Controls
 
         void DownButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Value > Minimum)
-            {
                 Value -= StepValue;
-                if (Value < Minimum)
-                    Value = Minimum;
-            }
+
         }
 
         void UpButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Value < Maximum)
-            {
                 Value += StepValue;
-                if (Value > Maximum)
-                    Value = Maximum;
-            }
+
         }
     }
 }

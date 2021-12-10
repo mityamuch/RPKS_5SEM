@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using Wpf.MVVM.Core;
 
@@ -22,8 +23,21 @@ namespace FIrstMVVMProg.Client.ViewModels
             }
         }
 
+        private string _text="0";
+        public string text
+        {
+            get => _text;
+            set
+            {
+                _text = value;
+                OnPropertyChanged(nameof(text));
+            }
+        }
 
+        private ICommand _textChangeCommand;
 
+        public ICommand TextChangeCommand =>
+            _textChangeCommand ??= new RelayCommand(x => TextChange((string)x));
 
         public StartWindowViewModel()
         {
@@ -46,6 +60,19 @@ namespace FIrstMVVMProg.Client.ViewModels
         private void Example()
         {
             MessageBox.Show("Привет чувак");
+        }
+
+        private void TextChange(string number)
+        {
+            if (number == "C")
+            {
+                text = "";
+            }
+            else
+            {
+                text+=Convert.ToInt32(number);
+            }
+
         }
 
     }

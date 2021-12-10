@@ -35,7 +35,6 @@ namespace FIrstMVVMProg.Client.Controls
             Refresh();
         }
         #endregion
-
         #region Dependency Properties
         #region BallBrush
         public static DependencyProperty BallBrushProperty = DependencyProperty.Register(nameof(BallBrush), typeof(Brush), typeof(Spinner), new UIPropertyMetadata(Brushes.Blue, PropertyChangedCallback));
