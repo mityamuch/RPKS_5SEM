@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Wpf.MVVM.Core;
 using FIrstMVVMProg.Client.Model;
+using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace FIrstMVVMProg.Client.ViewModels
 {
@@ -33,16 +35,8 @@ namespace FIrstMVVMProg.Client.ViewModels
         } = new ObservableCollection<Data>();
 
         public SortWindowViewModel() {
-            /*
-            Col.Add(new Data { Value = 100 });
-            Col.Add(new Data { Value = 500 });
-            Col.Add(new Data { Value = 300 });
-            Col.Add(new Data { Value = 900 });
-            Col.Add(new Data { Value = 480 });
-            Col.Add(new Data { Value = 600 });
-            Col.Add(new Data { Value = 700 });
-            Col.Add(new Data { Value = 950 });
-            */
+
+
         }
 
         #region Fields
@@ -54,7 +48,7 @@ namespace FIrstMVVMProg.Client.ViewModels
         private double _sliderValue=1;//Slider
         private string _selectedMethod;
 
-
+       
         #endregion
 
         #region Propertiers
@@ -178,6 +172,8 @@ namespace FIrstMVVMProg.Client.ViewModels
                 if (!flag)
                 {
                     Col.Add(new Data { Value = chislo });
+                    
+                    System.Threading.Thread.Sleep(50);
                 }
                 }
         }

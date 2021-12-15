@@ -38,7 +38,7 @@
             Grid.ColumnSpan="3" 
             Visibility="{Binding IsGistVisible, Converter={converters:BoolConverter}}">
             <dvc:Chart.Series>
-                <dvc:ColumnSeries ItemsSource="{Binding Col}" 
+                <dvc:ColumnSeries ItemsSource="{Binding Col,Mode=TwoWay}" 
                     IndependentValueBinding="{Binding Path=Value}"    
                     DependentValueBinding="{Binding Path=Value}">
                 </dvc:ColumnSeries>
@@ -53,7 +53,7 @@
                 Grid.ColumnSpan="3"
                 Visibility="{Binding IsDiagVisible, Converter={converters:BoolConverter}}" >
             <dvc:Chart.Series>
-                <dvc:PieSeries   ItemsSource="{Binding Col}" 
+                <dvc:PieSeries  ItemsSource="{Binding Col,Mode=TwoWay}" 
                         IndependentValueBinding="{Binding Path=Value}"  
                         DependentValueBinding="{Binding Path=Value}">
                 </dvc:PieSeries>

@@ -21,21 +21,19 @@ namespace FIrstMVVMProg.Client.Controls
         public SampleControl()
         {
             InitializeComponent();
-            this.DataContext = this;
         }
         public readonly static DependencyProperty MaximumProperty = DependencyProperty.Register("Maximum", typeof(int), typeof(SampleControl), new PropertyMetadata(100));
         public readonly static DependencyProperty MinimumProperty = DependencyProperty.Register("Minimum", typeof(int), typeof(SampleControl), new PropertyMetadata(0));
         public readonly static DependencyProperty StepProperty = DependencyProperty.Register("Step", typeof(int), typeof(SampleControl), new PropertyMetadata(1));
         public readonly static DependencyProperty ValueProperty  = 
             DependencyProperty.Register
-            ("Value",
+            (nameof(Value),
             typeof(int),
             typeof(SampleControl),
             new FrameworkPropertyMetadata(0,
             FrameworkPropertyMetadataOptions.None,
             PropertyChangedCallback,
-            CoerceValue),
-            IsValidateValue );
+            CoerceValue));
 
 
 
@@ -46,29 +44,27 @@ namespace FIrstMVVMProg.Client.Controls
 
         private static  object CoerceValue(DependencyObject d, object value)
         {
+            // тут лучше валидацию приделать раньше был validate но я его просто стер
+            // я не про ValidateValueCallback, а обработку входных параметров коирса
+            // что если value вовсе не int
+            // или d вовсе не SampleControl
+            // надеюсь смысл понятен
+            // ну и по 100500 раз заниматься приведениями типов и распаковкой - это некруто
+            //что происходит?
+            // я дурачёк просто
 
-            if ((int)value >= (d as SampleControl).Maximum) 
-                value = (d as SampleControl).Maximum;
-            else if ((int)value <= (d as SampleControl).Minimum)
-                value = (d as SampleControl).Minimum;
+            var @int = (int)value;
+            var cntrl = d as SampleControl;
+            var coerced = @int;
+
+            if (@int >= cntrl.Maximum) 
+                coerced = cntrl.Maximum;
+            else if (@int <= cntrl.Minimum)
+                coerced = cntrl.Minimum;
             
-            
-            return value;
+            return coerced;
         }
 
-        private static bool IsValidateValue(object value)
-        {
-            int a;
-            try
-            {
-                a=Convert.ToInt32(value);
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
-        }
 
         public int Maximum
         {
@@ -91,16 +87,22 @@ namespace FIrstMVVMProg.Client.Controls
             set { SetValue(StepProperty, value); }
         }
 
-        void DownButton_Click(object sender, RoutedEventArgs e)
+        // не думаешь что этих ребят стоит сделать public?
+        // я тоже так не думаю всё-таки)00
+        // но модификатор доступа лучше всегда указывать, повышается читабельность
+        public void DownButton_Click(object sender, RoutedEventArgs e)
         {
                 Value -= StepValue;
-
         }
 
-        void UpButton_Click(object sender, RoutedEventArgs e)
+        public void UpButton_Click(object sender, RoutedEventArgs e)
         {
                 Value += StepValue;
-
         }
+
+        // теперь давай подумаем логически
+        // Ты хочешь из этого контрола менять int
+        // могут быть траблы, потому что это value-тип
+        // ща продебажу
     }
 }

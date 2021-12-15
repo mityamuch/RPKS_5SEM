@@ -8,6 +8,7 @@ namespace FIrstMVVMProg.Client.Model
 {
     class Sorts
     {
+
         public void InsertionSort(ObservableCollection<Data> collection)
         {
             for (var i = 1; i < collection.Count; i++) {
