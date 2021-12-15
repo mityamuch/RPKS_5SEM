@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Media;
 using Wpf.MVVM.Core;
+using FIrstMVVMProg.Client.Model;
 
 namespace FIrstMVVMProg.Client.ViewModels
 {
@@ -37,7 +33,7 @@ namespace FIrstMVVMProg.Client.ViewModels
         } = new ObservableCollection<Data>();
 
         public SortWindowViewModel() {
-            
+            /*
             Col.Add(new Data { Value = 100 });
             Col.Add(new Data { Value = 500 });
             Col.Add(new Data { Value = 300 });
@@ -46,7 +42,7 @@ namespace FIrstMVVMProg.Client.ViewModels
             Col.Add(new Data { Value = 600 });
             Col.Add(new Data { Value = 700 });
             Col.Add(new Data { Value = 950 });
-            
+            */
         }
 
         #region Fields
@@ -54,8 +50,10 @@ namespace FIrstMVVMProg.Client.ViewModels
         private bool _isDiagVisible=true;
         private string _buttonText = "Пуск";
         private string _buttonBackground = "LightGreen";
-        private int _n;//NumericUpDown
+        private int _n=10;//NumericUpDown
         private double _sliderValue=1;//Slider
+        private string _selectedMethod;
+
 
         #endregion
 
@@ -114,6 +112,15 @@ namespace FIrstMVVMProg.Client.ViewModels
                 OnPropertyChanged(nameof(SliderValue));
             }
         }
+        public string SelectedMethod
+        {
+            get =>_selectedMethod; 
+            set 
+            {
+                _selectedMethod = value;
+                OnPropertyChanged(nameof(SelectedMethod));
+            }
+        }
         #endregion
 
         #region Commands
@@ -128,7 +135,6 @@ namespace FIrstMVVMProg.Client.ViewModels
            _diagVisible ??= new RelayCommand(_ => DiagVisible());
         public ICommand StartClickCommand =>
             _startClick ??= new RelayCommand(_ => StartClick());
-
         public ICommand MixClickCommand =>
             _mixClick ??= new RelayCommand(_ => MixClick());
 
@@ -155,22 +161,25 @@ namespace FIrstMVVMProg.Client.ViewModels
                 ButtonBackground = "LightGreen";
             }
         }
-
         private void MixClick()
         {
+            Col.Clear();
             Random rand = new Random();
-            Task<ObservableCollection<Data>>.Factory.StartNew(() =>
+            while (Col.Count != N)
             {
-                while (Col.Count != N)
+                int chislo = rand.Next(1, N+1);
+                bool flag = false;
+                foreach(Data d in Col)
                 {
-                    int n = rand.Next(1, N);
-                    if (!Col.Contains(new Data { Value=n }))
-                    {
-                        Col.Add(new Data { Value = n });
-                    }
+                    if (d.Value == chislo)
+                        flag = true;
                 }
-                return Col;
-            }).ContinueWith(task => {}, TaskScheduler.FromCurrentSynchronizationContext());
+
+                if (!flag)
+                {
+                    Col.Add(new Data { Value = chislo });
+                }
+                }
         }
         #endregion
 

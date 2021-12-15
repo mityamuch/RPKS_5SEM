@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:FIrstMVVMProg.Client.Views"
         xmlns:converters="clr-namespace:Muhanov.Wpf.MVVM;assembly=Muhanov.Wpf.MVVM"
         xmlns:dvc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:viewModels="clr-namespace:FIrstMVVMProg.Client.ViewModels"
         xmlns:SampleControls="clr-namespace:FIrstMVVMProg.Client.Controls"
         mc:Ignorable="d"
@@ -47,7 +46,7 @@
             </dvc:Chart>
 
 
-            <dvc:Chart  
+        <dvc:Chart  
                 Grid.Column="1"
                 Grid.Row="2"
                 Grid.RowSpan="3"
@@ -77,38 +76,35 @@
             Height="100" 
             Minimum="0" 
             Maximum="15"
-            Value="{Binding N, Mode=TwoWay}"
+            Value="{Binding Path=N, Mode=TwoWay }"
             />
         <Label Grid.Row="2" VerticalAlignment="Top" Content="Укажите тип сортировки:" Height="52"></Label>
-        <ComboBox Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="25"  >
+        <ComboBox 
+            Grid.Row="2" 
+            Grid.Column="0" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Width="150" 
+            Height="25"  
+            SelectedItem="{Binding Path=SelectedMethod}"
+            >
             <ComboBoxItem IsSelected="True">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>Вставками</TextBlock>
-                </StackPanel>
-
+                <TextBlock>Вставками</TextBlock>
             </ComboBoxItem>
             <ComboBoxItem >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>Выборами</TextBlock>
-                </StackPanel>
+                <TextBlock>Выборами</TextBlock>
             </ComboBoxItem>
 
             <ComboBoxItem >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>Поразрядная</TextBlock>
-                </StackPanel>
+                <TextBlock>Поразрядная</TextBlock>
             </ComboBoxItem>
 
             <ComboBoxItem >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>Слиянием</TextBlock>
-                </StackPanel>
+                <TextBlock>Слиянием</TextBlock>
             </ComboBoxItem>
 
             <ComboBoxItem >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock>Пирамидальная</TextBlock>
-                </StackPanel>
+                <TextBlock>Пирамидальная</TextBlock>
             </ComboBoxItem>
         </ComboBox>
         <TextBlock Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Text="Задайте интервал задержки между операциями сравнения элементов и обмена элементов местами:"></TextBlock>
@@ -124,7 +120,7 @@
                 IsSnapToTickEnabled="True"
                 AutoToolTipPlacement="BottomRight" 
                 AutoToolTipPrecision="2" 
-                Value="{Binding SliderValue, Mode=TwoWay}"
+                Value="{Binding Path=SliderValue, Mode=TwoWay}"
                 >
                 
         </Slider>
