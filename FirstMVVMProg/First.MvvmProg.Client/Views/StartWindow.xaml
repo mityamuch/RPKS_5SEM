@@ -242,11 +242,10 @@
 
         <TextBlock Grid.Row="7" Text="BoolConverter:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Grid.Row="7" 
-                   Text="BoolFontSize"
                    Grid.Column="1" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
-                   FontSize="{Binding BoolFontSize, Converter={converters:BoolConverter}, Mode=OneWay}" 
+                   Text="{Binding BoolFontSize, Converter={converters:BoolConverter}, Mode=OneWay}" 
                     >
 
         </TextBlock>

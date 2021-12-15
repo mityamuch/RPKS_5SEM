@@ -15,8 +15,8 @@ namespace Muhanov.Wpf.MVVM
             }
 
             return @bool
-                ? 20
-                : 10;
+                ? "Visible"
+                : "Hidden";
         }
 
     }

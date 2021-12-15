@@ -30,21 +30,31 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <dvc:Chart Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Grid.ColumnSpan="2" Visibility="Hidden" >
-            <dvc:Chart.Series >
-                <dvc:ColumnSeries  ItemsSource="{Binding Line1}" 
-                           DependentValuePath="Value" 
-                           IndependentValuePath="Value">
-                    <dvc:ColumnSeries.DependentRangeAxis>
-                        <dvc:LinearAxis Minimum="0" Maximum="1000" Orientation="Y"/>
-                    </dvc:ColumnSeries.DependentRangeAxis>
+
+
+        <dvc:Chart  
+            Grid.Column="1" 
+            Grid.Row="2" 
+            Grid.RowSpan="3" 
+            Grid.ColumnSpan="3" 
+            Visibility="{Binding IsGistVisible, Converter={converters:BoolConverter}}">
+            <dvc:Chart.Series>
+                <dvc:ColumnSeries ItemsSource="{Binding Col}" 
+                    IndependentValueBinding="{Binding Path=Value}"    
+                    DependentValueBinding="{Binding Path=Value}">
                 </dvc:ColumnSeries>
             </dvc:Chart.Series>
-        </dvc:Chart>
+            </dvc:Chart>
 
-        <dvc:Chart  Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Grid.ColumnSpan="3" >
+
+            <dvc:Chart  
+                Grid.Column="1"
+                Grid.Row="2"
+                Grid.RowSpan="3"
+                Grid.ColumnSpan="3"
+                Visibility="{Binding IsDiagVisible, Converter={converters:BoolConverter}}" >
             <dvc:Chart.Series>
-                <dvc:PieSeries   ItemsSource="{Binding Line1}"
+                <dvc:PieSeries   ItemsSource="{Binding Col}" 
                         IndependentValueBinding="{Binding Path=Value}"  
                         DependentValueBinding="{Binding Path=Value}">
                 </dvc:PieSeries>
@@ -54,13 +64,21 @@
 
         <Menu  VerticalAlignment="Top"  Grid.ColumnSpan="4">
             <MenuItem Header="Вид отображения">
-                <MenuItem Header="Круговая диаграмма" ></MenuItem>
-                <MenuItem Header="Гистограмма" />
+                <MenuItem Header="Круговая диаграмма" Command="{Binding DiagVisibleCommand}"></MenuItem>
+                <MenuItem Header="Гистограмма" Command="{Binding GistVisibleCommand}"/>
             </MenuItem>
         </Menu>
 
         <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap"  Text="Задайте значение n (Сортируемыми данными буду являтся числа от 1 до n):" Margin="0,25,0,0" Grid.RowSpan="2" ></TextBlock>
-        <SampleControls:SampleControl Grid.Column="0" Grid.Row="1" Width="150" Height="100" Minimum="0" Maximum="15"/>
+        <SampleControls:SampleControl 
+            Grid.Column="0" 
+            Grid.Row="1" 
+            Width="150" 
+            Height="100" 
+            Minimum="0" 
+            Maximum="15"
+            Value="{Binding N, Mode=TwoWay}"
+            />
         <Label Grid.Row="2" VerticalAlignment="Top" Content="Укажите тип сортировки:" Height="52"></Label>
         <ComboBox Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="25"  >
             <ComboBoxItem IsSelected="True">
@@ -99,19 +117,34 @@
                 VerticalAlignment="Center"  
                 Width="150" 
                 SelectionStart="1"  
-                Minimum="1" 
+                Minimum="0" 
                 Maximum="5" 
                 TickPlacement="Both" 
                 Foreground="Black"
                 IsSnapToTickEnabled="True"
                 AutoToolTipPlacement="BottomRight" 
                 AutoToolTipPrecision="2" 
+                Value="{Binding SliderValue, Mode=TwoWay}"
                 >
                 
         </Slider>
 
-        <Button Grid.Row="4" Content="Перемешать данные" Width="150" Height="50"></Button>
+        <Button Grid.Row="4"
+                Content="Перемешать данные"
+                Width="150"
+                Height="50"
+                Command="{Binding MixClickCommand}"
+                ></Button>
 
-        <Button Grid.Column="3" Grid.Row="1" Width="150" Height="50" Content="Пуск" Background="LightGreen"></Button>
+        <Button 
+            Grid.Column="3" 
+            Grid.Row="1" 
+            Width="150" 
+            Height="50" 
+            Content="{Binding ButtonText}" 
+            Background="{Binding ButtonBackground}"
+            Command="{Binding StartClickCommand}"
+            >
+        </Button>
     </Grid>
 </Window>
