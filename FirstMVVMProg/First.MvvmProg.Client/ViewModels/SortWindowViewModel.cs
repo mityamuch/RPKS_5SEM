@@ -6,6 +6,7 @@ using Wpf.MVVM.Core;
 using FIrstMVVMProg.Client.Model;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace FIrstMVVMProg.Client.ViewModels
 {
@@ -24,19 +25,31 @@ namespace FIrstMVVMProg.Client.ViewModels
         }
 
     }
-
+    public class InsertionSortState
+    {
+        public int i;public int j;
+        public void Clear()
+        {
+            i = 1;j = 1;
+        }
+    }
     class SortWindowViewModel : ViewModelBase
     {
+        public InsertionSortState ISS = new InsertionSortState {i = 1,j=1};
+
+
 
         public ObservableCollection<Data> Col
         {
             get;
             set;
         } = new ObservableCollection<Data>();
+        DispatcherTimer timer;
 
         public SortWindowViewModel() {
-
-
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timer_Tick;
         }
 
         #region Fields
@@ -104,6 +117,7 @@ namespace FIrstMVVMProg.Client.ViewModels
             {
                 _sliderValue = value;
                 OnPropertyChanged(nameof(SliderValue));
+                timer.Interval = TimeSpan.FromSeconds(Convert.ToInt32(value));
             }
         }
         public string SelectedMethod
@@ -144,20 +158,25 @@ namespace FIrstMVVMProg.Client.ViewModels
         }
         private void StartClick()
         {
+            
             if (ButtonText == "Пуск")
             {
                 ButtonText = "Пауза";
                 ButtonBackground = "IndianRed";
+                timer.Start();
             }
             else
             {
                 ButtonText = "Пуск";
                 ButtonBackground = "LightGreen";
+                timer.Stop();
             }
         }
         private void MixClick()
         {
             Col.Clear();
+            //Сброс алгоритмов
+            ISS.Clear();
             Random rand = new Random();
             while (Col.Count != N)
             {
@@ -176,14 +195,61 @@ namespace FIrstMVVMProg.Client.ViewModels
                     System.Threading.Thread.Sleep(50);
                 }
                 }
+
+            
         }
         #endregion
 
 
 
 
+        void timer_Tick(object sender, EventArgs e)
+        {
+            if ((SelectedMethod.IndexOf("Вставками")) != -1) 
+            { 
+
+                if (ISS.i == Col.Count)
+                {
+                    timer.Stop();
+                    ButtonText = "Пуск";
+                    ButtonBackground = "LightGreen";
+                    return;
+                }
+
+                if (Col[ISS.j].Value < Col[ISS.j-1].Value)
+                {
+                    var extra = Col[ISS.j].Value;
+                    Col[ISS.j ].Value = Col[ISS.j-1].Value;
+                    Col[ISS.j-1].Value = extra;
+                    ISS.j--;
+                    if (ISS.j == 0)
+                    {
+                        ISS.i++;
+                        ISS.j = ISS.i;
+                    }
+                }
+                else
+                {
+                    ISS.i++;
+                    ISS.j = ISS.i;
+                }
+            }
+
+            if((SelectedMethod.IndexOf("Выборами")) != -1) { }
+
+            if ((SelectedMethod.IndexOf("Поразрядная")) != -1){ }
+
+            if((SelectedMethod.IndexOf("Слиянием")) != -1) { }
+
+            if((SelectedMethod.IndexOf("Пирамидальная")) != -1) { }
 
 
+
+
+
+
+
+        }
 
     }
 }
