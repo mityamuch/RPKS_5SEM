@@ -54,6 +54,9 @@ namespace FIrstMVVMProg.Client.Model
                 countSort(collection, n, exp);
         }//Поразрядная
 
+
+
+
         public void MergeSort(ObservableCollection<Data> collection, int l, int r)
         {
 
@@ -141,6 +144,7 @@ namespace FIrstMVVMProg.Client.Model
             // initializing all elements of count to 0
             for (i = 0; i < 10; i++)
                 count[i] = 0;
+
 
             // Store count of occurrences in count[]
             for (i = 0; i < n; i++)

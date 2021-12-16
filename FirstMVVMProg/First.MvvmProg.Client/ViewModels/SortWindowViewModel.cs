@@ -1,5 +1,4 @@
 ﻿using System;
-
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Wpf.MVVM.Core;
@@ -25,19 +24,14 @@ namespace FIrstMVVMProg.Client.ViewModels
         }
 
     }
-    public class InsertionSortState
-    {
-        public int i;public int j;
-        public void Clear()
-        {
-            i = 1;j = 1;
-        }
-    }
+   
+
+
     class SortWindowViewModel : ViewModelBase
     {
         public InsertionSortState ISS = new InsertionSortState {i = 1,j=1};
-
-
+        public SelectionSortState SSS = new SelectionSortState { i = 0, j = 1, indmin =0 };
+        public RadixSortState RSS = new RadixSortState {i=0,j=0,shift = sizeof(int) * 8 - 1 };
 
         public ObservableCollection<Data> Col
         {
@@ -177,6 +171,9 @@ namespace FIrstMVVMProg.Client.ViewModels
             Col.Clear();
             //Сброс алгоритмов
             ISS.Clear();
+            SSS.Clear();
+            RSS.Clear();
+
             Random rand = new Random();
             while (Col.Count != N)
             {
@@ -191,8 +188,6 @@ namespace FIrstMVVMProg.Client.ViewModels
                 if (!flag)
                 {
                     Col.Add(new Data { Value = chislo });
-                    
-                    System.Threading.Thread.Sleep(50);
                 }
                 }
 
@@ -201,56 +196,89 @@ namespace FIrstMVVMProg.Client.ViewModels
         #endregion
 
 
-
-
         void timer_Tick(object sender, EventArgs e)
         {
             if ((SelectedMethod.IndexOf("Вставками")) != -1) 
-            { 
+            {
+                InsertionSortStep();
+            }
 
-                if (ISS.i == Col.Count)
-                {
-                    timer.Stop();
-                    ButtonText = "Пуск";
-                    ButtonBackground = "LightGreen";
-                    return;
-                }
+            if((SelectedMethod.IndexOf("Выборами")) != -1) 
+            {
+                SelectionSortStep();
+            }
 
-                if (Col[ISS.j].Value < Col[ISS.j-1].Value)
-                {
-                    var extra = Col[ISS.j].Value;
-                    Col[ISS.j ].Value = Col[ISS.j-1].Value;
-                    Col[ISS.j-1].Value = extra;
-                    ISS.j--;
-                    if (ISS.j == 0)
-                    {
-                        ISS.i++;
-                        ISS.j = ISS.i;
-                    }
-                }
-                else
+            if ((SelectedMethod.IndexOf("Поразрядная")) != -1){
+                RadixSortStep();
+            }
+
+            if((SelectedMethod.IndexOf("Слиянием")) != -1) {
+                MergeSortStep();
+            }
+
+            if((SelectedMethod.IndexOf("Пирамидальная")) != -1) {
+                HeapSortStep();
+            }
+
+        }
+
+        private void InsertionSortStep() 
+        {
+            if (ISS.i == Col.Count)
+            {
+                timer.Stop();
+                ButtonText = "Пуск";
+                ButtonBackground = "LightGreen";
+                return;
+            }
+
+            if (Col[ISS.j].Value < Col[ISS.j - 1].Value)
+            {
+                var extra = Col[ISS.j].Value;
+                Col[ISS.j].Value = Col[ISS.j - 1].Value;
+                Col[ISS.j - 1].Value = extra;
+                ISS.j--;
+                if (ISS.j == 0)
                 {
                     ISS.i++;
                     ISS.j = ISS.i;
                 }
             }
-
-            if((SelectedMethod.IndexOf("Выборами")) != -1) { }
-
-            if ((SelectedMethod.IndexOf("Поразрядная")) != -1){ }
-
-            if((SelectedMethod.IndexOf("Слиянием")) != -1) { }
-
-            if((SelectedMethod.IndexOf("Пирамидальная")) != -1) { }
-
-
-
-
-
+            else
+            {
+                ISS.i++;
+                ISS.j = ISS.i;
+            }
+        }
+        private void SelectionSortStep() 
+        {
+            if (SSS.i == Col.Count)
+            {
+                timer.Stop();
+                ButtonText = "Пуск";
+                ButtonBackground = "LightGreen";
+                return;
+            }
+            SSS.indmin = SSS.i;
+            for (SSS.j = SSS.i + 1; SSS.j < Col.Count; SSS.j++)
+            {
+                if (Col[SSS.j].Value < Col[SSS.indmin].Value)
+                {
+                    SSS.indmin = SSS.j;
+                }
+            }
+            int temp = Col[SSS.indmin].Value;
+            Col[SSS.indmin].Value = Col[SSS.i].Value;
+            Col[SSS.i].Value = temp;
+            SSS.i++;
+        }
+        private void RadixSortStep() 
+        {
 
 
         }
-
+        private void MergeSortStep() { }
+        private void HeapSortStep() { }
     }
 }
 
