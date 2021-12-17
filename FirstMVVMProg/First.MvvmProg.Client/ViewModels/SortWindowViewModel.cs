@@ -250,10 +250,7 @@ namespace FIrstMVVMProg.Client.ViewModels
             else
             {
                 MessageBox.Show("Нечего сортировать!");
-                ButtonText = "Пуск";
-                IsSpinnerVisible = false;
-                ButtonBackground = "LightGreen";
-                timer.Stop();
+                EndOfSort();
             }
 
         }
