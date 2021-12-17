@@ -1,61 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Text;
 using FIrstMVVMProg.Client.ViewModels;
 
 namespace FIrstMVVMProg.Client.Model
 {
+    public class InsertionSortState
+    {
+        public int i; public int j;
+        public void Clear()
+        {
+            i = 1; j = 1;
+        }
+
+
+    }
+    public class SelectionSortState
+    {
+        public int i; public int j; public int indmin;
+        public void Clear()
+        {
+            i = 0; j = 1; indmin = 0;
+        }
+    }
     class Sorts
     {
 
-        public void InsertionSort(ObservableCollection<Data> collection)
-        {
-            for (var i = 1; i < collection.Count; i++) {
-
-                var x = collection[i].Value;
-                var j = i - 1;
-                while (j >= 0&& x < collection[j].Value){
-
-                    collection[j + 1] = collection[j];
-                    j -= 1;
-                }
-                collection[j + 1].Value = x;
-            }
-        }//Вставками
-
-        public void SelectionSort(ObservableCollection<Data> collection)//Выборками
-        {
-            for (int i = 0; i < collection.Count-1; i++)
-            {
-                //поиск минимального числа
-                int min = i;
-                for (int j = i + 1; j < collection.Count; j++)
-                {
-                    if (collection[j].Value < collection[min].Value)
-                    {
-                        min = j;
-                    }
-                }
-                //обмен элементов
-                int temp = collection[min].Value;
-                collection[min].Value = collection[i].Value;
-                collection[i].Value = temp;
-            }
-
-        }
-
-        public void RadixSort(ObservableCollection<Data> collection)
+        public static IEnumerable RadixSort(ObservableCollection<Data> collection)
         {
             int n = collection.Count;
             int m = getMax(collection, n);
 
             for (int exp = 1; m / exp > 0; exp *= 10)
+            {
                 countSort(collection, n, exp);
+                yield return exp;
+            }
         }//Поразрядная
-
-
-        public void MergeSort(ObservableCollection<Data> collection, int l, int r)
+        public static IEnumerable MergeSort(ObservableCollection<Data> collection, int l, int r)
         {
             if (l < r)
             {
@@ -64,21 +48,31 @@ namespace FIrstMVVMProg.Client.Model
                 int m = l + (r - l) / 2;
                 // Sort first and
                 // second halves
-                MergeSort(collection, l, m);
-                MergeSort(collection, m + 1, r);
+                foreach (var i in MergeSort(collection, l, m)) {
+                    yield return i;
+                }
+                foreach(var i in MergeSort(collection, m + 1, r)) { 
+                    yield return i;
+                }
                 // Merge the sorted halves
-                merge(collection, l, m, r);
+                foreach (var i in merge(collection, l, m, r))
+                {
+                    yield return i;
+                }
             }
         }//Слиянием
-
-        public void Heapsort(ObservableCollection<Data> collection)
+        public static IEnumerable Heapsort(ObservableCollection<Data> collection)
         {
             int n = collection.Count;
-
             // Build heap (rearrange array)
             for (int i = n / 2 - 1; i >= 0; i--)
-                heapify(collection, n, i);
-
+            {
+                foreach (var k in heapify(collection, n, i))
+                {
+                    yield return k;
+                }
+                
+            }
             // One by one extract an element from heap
             for (int i = n - 1; i > 0; i--)
             {
@@ -87,18 +81,18 @@ namespace FIrstMVVMProg.Client.Model
                 collection[0].Value = collection[i].Value;
                 collection[i].Value = temp;
 
-                // call max heapify on the reduced heap
-                heapify(collection, i, 0);
+               foreach(var k in heapify(collection, i, 0))
+                {
+                    yield return k;
+                }
+                
             }
         }//Пирамидальная
 
 
 
 
-
-        // To heapify a subtree rooted with node i which is
-        // an index in arr[]. n is size of heap
-        private void heapify(ObservableCollection<Data> collection, int n, int i)
+        private static IEnumerable heapify(ObservableCollection<Data> collection, int n, int i)
         {
             int largest = i; // Initialize largest as root
             int l = 2 * i + 1; // left = 2*i + 1
@@ -118,12 +112,15 @@ namespace FIrstMVVMProg.Client.Model
                 int swap = collection[i].Value;
                 collection[i].Value = collection[largest].Value;
                 collection[largest].Value = swap;
-
+                yield return 0;
                 // Recursively heapify the affected sub-tree
-                heapify(collection, n, largest);
+                foreach (var k in heapify(collection, n, largest))
+                {
+                    yield return k;
+                }
             }
         }
-        private int getMax(ObservableCollection<Data> collection, int n)
+        private static int getMax(ObservableCollection<Data> collection, int n)
         {
             int mx = collection[0].Value;
             for (int i = 1; i < n; i++)
@@ -133,39 +130,25 @@ namespace FIrstMVVMProg.Client.Model
         }
         private static void countSort(ObservableCollection<Data> collection, int n, int exp)
         {
-            int[] output = new int[n]; // output array
+            int[] output = new int[n];
             int i;
             int[] count = new int[10];
-
-            // initializing all elements of count to 0
             for (i = 0; i < 10; i++)
                 count[i] = 0;
-
-
-            // Store count of occurrences in count[]
             for (i = 0; i < n; i++)
                 count[(collection[i].Value / exp) % 10]++;
-
-            // Change count[i] so that count[i] now contains
-            // actual
-            //  position of this digit in output[]
             for (i = 1; i < 10; i++)
                 count[i] += count[i - 1];
 
-            // Build the output array
             for (i = n - 1; i >= 0; i--)
             {
                 output[count[(collection[i].Value / exp) % 10] - 1] = collection[i].Value;
                 count[(collection[i].Value / exp) % 10]--;
             }
-
-            // Copy the output array to arr[], so that arr[] now
-            // contains sorted numbers according to current
-            // digit
             for (i = 0; i < n; i++)
                 collection[i].Value = output[i];
         }
-        private void merge(ObservableCollection<Data> collection, int l, int m, int r)
+        private static IEnumerable merge(ObservableCollection<Data> collection, int l, int m, int r)
         {
             // Find sizes of two
             // subarrays to be merged
@@ -206,6 +189,7 @@ namespace FIrstMVVMProg.Client.Model
                     j++;
                 }
                 k++;
+                yield return 0;
             }
 
             // Copy remaining elements
@@ -215,6 +199,7 @@ namespace FIrstMVVMProg.Client.Model
                 collection[k].Value = L[i];
                 i++;
                 k++;
+                yield return 0;
             }
 
             // Copy remaining elements
@@ -224,6 +209,7 @@ namespace FIrstMVVMProg.Client.Model
                 collection[k].Value = R[j];
                 j++;
                 k++;
+                yield return 0;
             }
         }
     }

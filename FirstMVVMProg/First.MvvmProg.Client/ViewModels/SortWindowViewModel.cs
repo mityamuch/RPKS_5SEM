@@ -3,8 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Wpf.MVVM.Core;
 using FIrstMVVMProg.Client.Model;
-using System.Collections.Specialized;
-using System.ComponentModel;
+using System.Collections;
 using System.Windows.Threading;
 using System.Windows;
 
@@ -30,9 +29,10 @@ namespace FIrstMVVMProg.Client.ViewModels
 
     class SortWindowViewModel : ViewModelBase
     {
-        public InsertionSortState ISS = new InsertionSortState {i = 1,j=1};
-        public SelectionSortState SSS = new SelectionSortState { i = 0, j = 1, indmin =0 };
-        public RadixSortState RSS = new RadixSortState {i=0,j=0,shift = sizeof(int) * 8 - 1 };
+        public InsertionSortState _ISS = new InsertionSortState {i = 1,j=1};
+        public SelectionSortState _SSS = new SelectionSortState { i = 0, j = 1, indmin =0 };
+        IEnumerator _sortState = null;
+        bool _is_at_end = false;
 
         public ObservableCollection<Data> Col
         {
@@ -188,15 +188,16 @@ namespace FIrstMVVMProg.Client.ViewModels
                 ButtonBackground = "LightGreen";
                 timer.Stop();
                 IsEnabled = true ;
+
             }
         }
         private void MixClick()
         {
             Col.Clear();
             //Сброс алгоритмов
-            ISS.Clear();
-            SSS.Clear();
-            RSS.Clear();
+            _ISS.Clear();
+            _SSS.Clear();
+
 
             Random rand = new Random();
             while (Col.Count != N)
@@ -261,67 +262,109 @@ namespace FIrstMVVMProg.Client.ViewModels
 
         }
 
+        public void EndOfSort()
+        {
+            timer.Stop();
+            ButtonText = "Пуск";
+            IsSpinnerVisible = false;
+            ButtonBackground = "LightGreen";
+            IsEnabled = true;
+        }
+        
+        //БЕЗ Ienumerable
         private void InsertionSortStep() 
         {
-            if (ISS.i == Col.Count)
+            if (_ISS.i == Col.Count)
             {
-                timer.Stop();
-                ButtonText = "Пуск";
-                IsSpinnerVisible = false;
-                ButtonBackground = "LightGreen";
-                IsEnabled = true;
+                EndOfSort();
                 return;
             }
 
-            if (Col[ISS.j].Value < Col[ISS.j - 1].Value)
+            if (Col[_ISS.j].Value < Col[_ISS.j - 1].Value)
             {
-                var extra = Col[ISS.j].Value;
-                Col[ISS.j].Value = Col[ISS.j - 1].Value;
-                Col[ISS.j - 1].Value = extra;
-                ISS.j--;
-                if (ISS.j == 0)
+                var extra = Col[_ISS.j].Value;
+                Col[_ISS.j].Value = Col[_ISS.j - 1].Value;
+                Col[_ISS.j - 1].Value = extra;
+                _ISS.j--;
+                if (_ISS.j == 0)
                 {
-                    ISS.i++;
-                    ISS.j = ISS.i;
+                    _ISS.i++;
+                    _ISS.j = _ISS.i;
                 }
             }
             else
             {
-                ISS.i++;
-                ISS.j = ISS.i;
+                _ISS.i++;
+                _ISS.j = _ISS.i;
             }
         }
         private void SelectionSortStep() 
         {
-            if (SSS.i == Col.Count)
+            if (_SSS.i == Col.Count)
             {
-                timer.Stop();
-                IsSpinnerVisible = false;
-                ButtonText = "Пуск";
-                ButtonBackground = "LightGreen";
-                IsEnabled = true;
+                EndOfSort();
                 return;
             }
-            SSS.indmin = SSS.i;
-            for (SSS.j = SSS.i + 1; SSS.j < Col.Count; SSS.j++)
+            _SSS.indmin = _SSS.i;
+            for (_SSS.j = _SSS.i + 1; _SSS.j < Col.Count; _SSS.j++)
             {
-                if (Col[SSS.j].Value < Col[SSS.indmin].Value)
+                if (Col[_SSS.j].Value < Col[_SSS.indmin].Value)
                 {
-                    SSS.indmin = SSS.j;
+                    _SSS.indmin = _SSS.j;
                 }
             }
-            int temp = Col[SSS.indmin].Value;
-            Col[SSS.indmin].Value = Col[SSS.i].Value;
-            Col[SSS.i].Value = temp;
-            SSS.i++;
+            int temp = Col[_SSS.indmin].Value;
+            Col[_SSS.indmin].Value = Col[_SSS.i].Value;
+            Col[_SSS.i].Value = temp;
+            _SSS.i++;
         }
+        
+        //С Ienumerable
         private void RadixSortStep() 
         {
-
-
+            if (_sortState == null)
+            {
+                _sortState = Sorts.RadixSort(Col).GetEnumerator();
+                _is_at_end = false;
+            }
+            if (_is_at_end)
+            {
+                EndOfSort();
+                 _sortState = null;
+                return;
+            }
+            _is_at_end = !_sortState.MoveNext();
         }
-        private void MergeSortStep() { }
-        private void HeapSortStep() { }
+        private void MergeSortStep() 
+        {
+            if (_sortState == null)
+            {
+                _sortState = Sorts.MergeSort(Col,0,Col.Count-1).GetEnumerator();
+                _is_at_end = false;
+            }
+            if (_is_at_end)
+            {
+                EndOfSort();
+                _sortState = null;
+                return;
+            }
+            _is_at_end = !_sortState.MoveNext();
+        }
+        private void HeapSortStep() 
+        {
+            if (_sortState == null)
+            {
+                _sortState = Sorts.Heapsort(Col).GetEnumerator();
+                _is_at_end = false;
+            }
+            if (_is_at_end)
+            {
+                EndOfSort();
+                _sortState = null;
+                return;
+            }
+            _is_at_end = !_sortState.MoveNext();
+        }
     }
 }
 
