@@ -6,6 +6,7 @@ using FIrstMVVMProg.Client.Model;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Threading;
+using System.Windows;
 
 namespace FIrstMVVMProg.Client.ViewModels
 {
@@ -54,8 +55,8 @@ namespace FIrstMVVMProg.Client.ViewModels
         private int _n=10;//NumericUpDown
         private double _sliderValue=1;//Slider
         private string _selectedMethod;
-
-       
+        private bool _isSpinnerVisible=false;
+        private bool _isEnabled = true;
         #endregion
 
         #region Propertiers
@@ -123,7 +124,27 @@ namespace FIrstMVVMProg.Client.ViewModels
                 OnPropertyChanged(nameof(SelectedMethod));
             }
         }
+
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set
+            {
+                _isEnabled = value;
+                OnPropertyChanged(nameof(IsEnabled));
+            }
+        }
+
         #endregion
+        public bool IsSpinnerVisible
+        {
+            get => _isSpinnerVisible;
+            set
+            {
+                _isSpinnerVisible = value;
+                OnPropertyChanged(nameof(IsSpinnerVisible));
+            }
+        }
 
         #region Commands
         private ICommand _gistVisible;
@@ -158,12 +179,16 @@ namespace FIrstMVVMProg.Client.ViewModels
                 ButtonText = "Пауза";
                 ButtonBackground = "IndianRed";
                 timer.Start();
+                IsSpinnerVisible = true;
+                IsEnabled = false;
             }
             else
             {
                 ButtonText = "Пуск";
+                IsSpinnerVisible = false ;
                 ButtonBackground = "LightGreen";
                 timer.Stop();
+                IsEnabled = true ;
             }
         }
         private void MixClick()
@@ -198,26 +223,41 @@ namespace FIrstMVVMProg.Client.ViewModels
 
         void timer_Tick(object sender, EventArgs e)
         {
-            if ((SelectedMethod.IndexOf("Вставками")) != -1) 
+            if (Col.Count != 0)
             {
-                InsertionSortStep();
-            }
 
-            if((SelectedMethod.IndexOf("Выборами")) != -1) 
+                if ((SelectedMethod.IndexOf("Вставками")) != -1)
+                {
+                    InsertionSortStep();
+                }
+
+                if ((SelectedMethod.IndexOf("Выборами")) != -1)
+                {
+                    SelectionSortStep();
+                }
+
+                if ((SelectedMethod.IndexOf("Поразрядная")) != -1)
+                {
+                    RadixSortStep();
+                }
+
+                if ((SelectedMethod.IndexOf("Слиянием")) != -1)
+                {
+                    MergeSortStep();
+                }
+
+                if ((SelectedMethod.IndexOf("Пирамидальная")) != -1)
+                {
+                    HeapSortStep();
+                }
+            }
+            else
             {
-                SelectionSortStep();
-            }
-
-            if ((SelectedMethod.IndexOf("Поразрядная")) != -1){
-                RadixSortStep();
-            }
-
-            if((SelectedMethod.IndexOf("Слиянием")) != -1) {
-                MergeSortStep();
-            }
-
-            if((SelectedMethod.IndexOf("Пирамидальная")) != -1) {
-                HeapSortStep();
+                MessageBox.Show("Нечего сортировать!");
+                ButtonText = "Пуск";
+                IsSpinnerVisible = false;
+                ButtonBackground = "LightGreen";
+                timer.Stop();
             }
 
         }
@@ -228,7 +268,9 @@ namespace FIrstMVVMProg.Client.ViewModels
             {
                 timer.Stop();
                 ButtonText = "Пуск";
+                IsSpinnerVisible = false;
                 ButtonBackground = "LightGreen";
+                IsEnabled = true;
                 return;
             }
 
@@ -255,8 +297,10 @@ namespace FIrstMVVMProg.Client.ViewModels
             if (SSS.i == Col.Count)
             {
                 timer.Stop();
+                IsSpinnerVisible = false;
                 ButtonText = "Пуск";
                 ButtonBackground = "LightGreen";
+                IsEnabled = true;
                 return;
             }
             SSS.indmin = SSS.i;

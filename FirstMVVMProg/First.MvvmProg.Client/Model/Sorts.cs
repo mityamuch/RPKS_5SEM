@@ -55,12 +55,8 @@ namespace FIrstMVVMProg.Client.Model
         }//Поразрядная
 
 
-
-
         public void MergeSort(ObservableCollection<Data> collection, int l, int r)
         {
-
-
             if (l < r)
             {
                 // Find the middle
