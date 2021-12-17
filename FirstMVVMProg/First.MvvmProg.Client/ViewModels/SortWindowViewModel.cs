@@ -134,9 +134,7 @@ namespace FIrstMVVMProg.Client.ViewModels
                 OnPropertyChanged(nameof(IsEnabled));
             }
         }
-
-        #endregion
-        public bool IsSpinnerVisible
+          public bool IsSpinnerVisible
         {
             get => _isSpinnerVisible;
             set
@@ -145,7 +143,8 @@ namespace FIrstMVVMProg.Client.ViewModels
                 OnPropertyChanged(nameof(IsSpinnerVisible));
             }
         }
-
+        #endregion
+      
         #region Commands
         private ICommand _gistVisible;
         private ICommand _diagVisible;
