@@ -183,11 +183,7 @@ namespace FIrstMVVMProg.Client.ViewModels
             }
             else
             {
-                ButtonText = "Пуск";
-                IsSpinnerVisible = false ;
-                ButtonBackground = "LightGreen";
-                timer.Stop();
-                IsEnabled = true ;
+                EndOfSort();
 
             }
         }
