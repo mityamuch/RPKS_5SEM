@@ -183,6 +183,7 @@ namespace FIrstMVVMProg.Client.ViewModels
             }
             else
             {
+                
                 EndOfSort();
 
             }
@@ -193,7 +194,8 @@ namespace FIrstMVVMProg.Client.ViewModels
             //Сброс алгоритмов
             _ISS.Clear();
             _SSS.Clear();
-
+            _sortState = null;
+            _is_at_end = false;
 
             Random rand = new Random();
             while (Col.Count != N)
