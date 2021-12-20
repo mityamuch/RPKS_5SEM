@@ -1,0 +1,38 @@
+﻿<Window x:Class="Fontgame.Client.TipWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fontgame.Client"
+        mc:Ignorable="d"
+        Title="Подсказка" Height="200" Width="400" Background="LightBlue" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/iconfinder-quiz-4595790_122224.ico">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition  Height="0.2*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+            <RadioButton x:Name="Tip1" GroupName="Tips" Content="Узнать случайную букву шрифта" IsChecked="True" />
+            <RadioButton x:Name="Tip2" GroupName="Tips" Content="Посмотреть написание выбранным шрифтом" />
+            <RadioButton x:Name="Tip3" GroupName="Tips" Content="Сравнить размер шрифта" />
+            <RadioButton x:Name="Tip4" GroupName="Tips" Content="Сравнить цвет шрифта" />
+        </StackPanel>
+        <Button 
+            Content="Показать"
+            Grid.Column="1"
+            Grid.Row="3" 
+            Click="Button_Click"
+            Background="YellowGreen"
+            ></Button>
+    </Grid>
+</Window>

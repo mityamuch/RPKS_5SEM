@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="iconfinder-quiz-4595790_122224.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Muhanov.Wpf.MVVM\Muhanov.Wpf.MVVM.csproj" />
+    <ProjectReference Include="..\Wpf.MVVM.Core\Muhanov.Wpf.MVVM.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="iconfinder-quiz-4595790_122224.ico" />
+  </ItemGroup>
+
+</Project>
