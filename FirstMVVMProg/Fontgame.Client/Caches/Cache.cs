@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Fontgame.Client
 {
-    public class User:IComparable
+    public class User:IComparable,IComparable<User>
     {
         public string Name;
         public int Score;
@@ -13,11 +13,22 @@ namespace Fontgame.Client
 
         public int CompareTo(object u)
         {
+            if (u == null)
+            {
+                throw new ArgumentNullException(nameof(u),"gg");
+            }
             User p = u as User;
             if (p != null)
-                return this.Score.CompareTo(p.Score);
+                return CompareTo(p);
             else
-                throw new Exception("Невозможно сравнить два объекта");
+                throw new ArgumentException("Невозможно сравнить два объекта");
+        }
+        public int CompareTo(User u)
+        {
+            if (u != null)
+                return this.Score.CompareTo(u.Score);
+            else
+                throw new ArgumentException("Невозможно сравнить два объекта");
         }
 
     }
@@ -52,6 +63,7 @@ namespace Fontgame.Client
                     string text = u.Name + ":" + u.Score.ToString()+":"+u.Date;
                     sw.WriteLine(text);
                 }
+               
             }
 
 

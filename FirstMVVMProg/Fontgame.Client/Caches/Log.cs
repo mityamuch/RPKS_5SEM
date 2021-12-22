@@ -11,7 +11,7 @@ namespace Fontgame.Client
         public static void Write(string name,string text)
         {
             string _path =Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FontGame\\Log", name);
-
+            //Guid.NewGuid()-nameoffile
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FontGame\\Log"))
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FontGame\\Log");

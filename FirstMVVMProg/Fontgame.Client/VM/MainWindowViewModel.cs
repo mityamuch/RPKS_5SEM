@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Fontgame.Client
 {
-   public class MainWindowViewModel : ViewModelBase
+   public sealed class MainWindowViewModel : ViewModelBase
     {
         public ObservableCollection<string> FontFamilies
         {
@@ -73,6 +73,7 @@ namespace Fontgame.Client
 
             #endregion
             Random rnd = new Random();
+
             FontSize= rnd.Next(30, 70);
             FontFamily = FontFamilies[rnd.Next(0,130)];
             FontStyle =FontStyles[rnd.Next(0,2)];
